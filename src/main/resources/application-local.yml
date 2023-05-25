@@ -1,0 +1,6 @@
+mysql:
+  username: techfood
+  password: techfood
+  database: techfood
+  url: localhost:3306
+
