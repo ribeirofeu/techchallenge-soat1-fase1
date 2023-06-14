@@ -17,7 +17,7 @@ public class ProductEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Getter
-  private UUID id;
+  private Long id;
 
   private String name;
   private BigDecimal unitValue;
@@ -28,10 +28,10 @@ public class ProductEntity {
   private CategoryEntity category;
 
   public ProductEntity (Product product) {
-      this.id = product.getId();
       this.name = product.getName();
       this.unitValue = product.getUnitValue();
       this.description = product.getDescription();
+      this.category = new CategoryEntity(product.getCategory());
   }
 
     public Product toProduct() {
@@ -40,6 +40,7 @@ public class ProductEntity {
                 .name(name)
                 .unitValue(unitValue)
                 .description(description)
+                .category(category.toCategory())
                 .build();
     }
 

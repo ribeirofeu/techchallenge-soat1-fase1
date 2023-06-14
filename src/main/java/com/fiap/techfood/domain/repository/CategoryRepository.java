@@ -2,21 +2,19 @@ package com.fiap.techfood.domain.repository;
 
 import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ProductRepository {
+public interface CategoryRepository {
 
-    Optional<Product> findById(Long id);
+    Optional<Category> findById(Long id);
 
-    void save(Product product);
+    void save(Category category);
 
-    List<Product> findAll();
+    List<Category> findAll();
 
-    Optional<List<Product>> findByCategory(Category category);
-
+    List<Product> findProductByCategory(Long id);
 
 
 }

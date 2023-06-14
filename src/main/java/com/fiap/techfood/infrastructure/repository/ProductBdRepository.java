@@ -21,7 +21,7 @@ public class ProductBdRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<Product> findById(UUID id) {
+    public Optional<Product> findById(Long id) {
         Optional<ProductEntity> entity = repo.findById(id);
 
         if (entity.isPresent()){
@@ -33,7 +33,8 @@ public class ProductBdRepository implements ProductRepository {
 
     @Override
     public void save(Product product) {
-        ProductEntity entity = repo.save(new ProductEntity(product));
+        ProductEntity entity = new ProductEntity(product);
+        repo.save(entity);
         product.setId(entity.getId());
     }
 

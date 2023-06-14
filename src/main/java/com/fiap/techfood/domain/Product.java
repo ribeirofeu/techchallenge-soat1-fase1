@@ -11,7 +11,7 @@ import java.util.UUID;
 @Builder
 public class Product {
 
-  private UUID id;
+  private Long id;
   private String name;
   private BigDecimal unitValue;
   private Category category;

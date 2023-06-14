@@ -19,21 +19,15 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public UUID createProduct(ProductDTO dto) {
+  public Long createProduct(ProductDTO dto) {
     Product product = Product.fromProductDTO(dto);
     repo.save(product);
     return product.getId();
   }
 
   @Override
-  public Product findProductById(UUID id) {
+  public Product findProductById(Long id) {
     return repo.findById(id).orElseThrow(() -> new BusinessException("Product ID not found"));
-  }
-
-  @Override
-  public List<Product> findProductByCategory(Category category) {
-    return repo.findByCategory(category)
-        .orElseThrow(() -> new BusinessException("Not registered product in this category"));
   }
 
   @Override

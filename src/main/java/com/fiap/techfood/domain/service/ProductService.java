@@ -10,11 +10,9 @@ import java.util.UUID;
 
 public interface ProductService {
 
-    UUID createProduct(ProductDTO dto) ;
+    Long createProduct(ProductDTO dto) ;
 
-    Product findProductById(UUID id);
-
-    List<Product> findProductByCategory(Category category);
+    Product findProductById(Long id);
 
     List<Product> findAllProducts();
 

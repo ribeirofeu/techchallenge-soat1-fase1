@@ -23,13 +23,13 @@ public class ProductController {
     }
 
     @PostMapping
-    ResponseEntity<UUID> createProduct (@RequestBody ProductDTO request) {
-        UUID id = service.createProduct(request);
+    ResponseEntity<Long> createProduct (@RequestBody ProductDTO request) {
+        Long id = service.createProduct(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Product> findProduct (@PathVariable UUID id) {
+    ResponseEntity<Product> findProduct (@PathVariable Long id) {
        return  ResponseEntity.ok(service.findProductById(id));
     }
 
