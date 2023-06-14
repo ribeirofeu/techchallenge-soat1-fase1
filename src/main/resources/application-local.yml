@@ -4,3 +4,8 @@ mysql:
   database: techfood
   url: localhost:3306
 
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
