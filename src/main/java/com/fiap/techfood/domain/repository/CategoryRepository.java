@@ -16,5 +16,8 @@ public interface CategoryRepository {
 
     List<Product> findProductByCategory(Long id);
 
+    void deleteCategory(Long id);
+
+    void updateCategory(Category category);
 
 }

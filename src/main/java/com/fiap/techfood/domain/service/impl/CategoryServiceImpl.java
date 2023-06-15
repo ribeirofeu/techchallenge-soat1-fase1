@@ -9,6 +9,9 @@ import com.fiap.techfood.domain.repository.CategoryRepository;
 import com.fiap.techfood.domain.repository.ProductRepository;
 import com.fiap.techfood.domain.service.CategoryService;
 import com.fiap.techfood.domain.service.ProductService;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
@@ -28,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
 
   @Override
   public Category findCategoryById(Long id) {
-    return repo.findById(id).orElseThrow(() -> new BusinessException("Category ID not found"));
+    return repo.findById(id).orElseThrow(() -> new BusinessException("Category ID not found", HttpStatus.NOT_FOUND));
   }
 
   @Override
@@ -40,4 +43,20 @@ public class CategoryServiceImpl implements CategoryService {
   public List<Category> findAllCategories() {
     return repo.findAll();
   }
+
+    @Override
+    public void deleteCategory(Long id) {
+        repo.deleteCategory(id);
+    }
+
+    @Override
+    public void updateCategory(Long id, CategoryDTO dto) {
+        try {
+            Category category = Category.fromCategoryDto(dto);
+            category.setId(id);
+            repo.save(category);
+        }catch (DataIntegrityViolationException e) {
+            throw new BusinessException("Category ID invalid", HttpStatus.NOT_FOUND);
+        }
+    }
 }

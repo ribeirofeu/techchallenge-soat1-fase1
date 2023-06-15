@@ -8,9 +8,8 @@ import java.math.BigDecimal;
 @Data
 public class ProductDTO {
 
-    private String name;
-    private BigDecimal unitValue;
-    private Category category;
-    private String description;
-
+  private String name;
+  private BigDecimal unitValue;
+  private Category category;
+  private String description;
 }

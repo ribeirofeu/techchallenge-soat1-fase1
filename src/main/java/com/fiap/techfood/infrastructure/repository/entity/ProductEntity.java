@@ -28,6 +28,7 @@ public class ProductEntity {
   private CategoryEntity category;
 
   public ProductEntity (Product product) {
+      this.id = product.getId();
       this.name = product.getName();
       this.unitValue = product.getUnitValue();
       this.description = product.getDescription();

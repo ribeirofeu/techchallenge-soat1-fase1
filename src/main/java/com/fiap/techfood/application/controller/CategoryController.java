@@ -3,9 +3,7 @@ package com.fiap.techfood.application.controller;
 import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.dto.CategoryDTO;
-import com.fiap.techfood.domain.dto.ProductDTO;
 import com.fiap.techfood.domain.service.CategoryService;
-import com.fiap.techfood.domain.service.ProductService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,6 +40,18 @@ public class CategoryController {
     @GetMapping("/{id}/products")
     ResponseEntity<List<Product>> findProductByCategory (@PathVariable Long id) {
         return  ResponseEntity.ok(service.findProductByCategory(id));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCategory(@PathVariable Long id) {
+        service.deleteCategory(id);
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<String> updateCategory (@RequestBody CategoryDTO request, @PathVariable Long id) {
+        service.updateCategory(id, request);
+        return ResponseEntity.ok("Category Updated Successful");
     }
 
 }
