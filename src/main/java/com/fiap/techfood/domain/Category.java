@@ -1,12 +1,11 @@
 package com.fiap.techfood.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fiap.techfood.domain.dto.CategoryDTO;
+import com.fiap.techfood.domain.dto.request.CategoryRequestDTO;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -18,7 +17,7 @@ public class Category {
   private List<Product> products;
 
 
-  public static Category fromCategoryDto(CategoryDTO dto) {
+  public static Category fromCategoryDto(CategoryRequestDTO dto) {
     return Category.builder().name(dto.getName()).build();
   }
 }

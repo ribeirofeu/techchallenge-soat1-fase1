@@ -1,9 +1,8 @@
 package com.fiap.techfood.infrastructure.repository;
 
-import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.repository.ProductRepository;
+import com.fiap.techfood.domain.ports.repositories.ProductRepository;
 import com.fiap.techfood.infrastructure.repository.entity.ProductEntity;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component

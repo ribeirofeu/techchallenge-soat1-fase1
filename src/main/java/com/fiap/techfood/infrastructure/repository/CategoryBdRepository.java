@@ -3,7 +3,7 @@ package com.fiap.techfood.infrastructure.repository;
 import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.repository.CategoryRepository;
+import com.fiap.techfood.domain.ports.repositories.CategoryRepository;
 import com.fiap.techfood.infrastructure.repository.entity.CategoryEntity;
 import java.util.Collections;
 import java.util.List;

@@ -1,29 +1,26 @@
-package com.fiap.techfood.domain.service.impl;
+package com.fiap.techfood.domain.services;
 
 import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.dto.CategoryDTO;
-import com.fiap.techfood.domain.dto.ProductDTO;
+import com.fiap.techfood.domain.dto.request.CategoryRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.repository.CategoryRepository;
-import com.fiap.techfood.domain.repository.ProductRepository;
-import com.fiap.techfood.domain.service.CategoryService;
-import com.fiap.techfood.domain.service.ProductService;
+import com.fiap.techfood.domain.ports.services.CategoryServicePort;
+import com.fiap.techfood.domain.ports.repositories.CategoryRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryService implements CategoryServicePort {
 
   private final CategoryRepository repo;
 
-  public CategoryServiceImpl(final CategoryRepository repo) {
+  public CategoryService(final CategoryRepository repo) {
     this.repo = repo;
   }
 
   @Override
-  public Long createCategory(CategoryDTO dto) {
+  public Long createCategory(CategoryRequestDTO dto) {
     Category category = Category.fromCategoryDto(dto);
     repo.save(category);
     return category.getId();
@@ -50,7 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void updateCategory(Long id, CategoryDTO dto) {
+    public void updateCategory(Long id, CategoryRequestDTO dto) {
         try {
             Category category = Category.fromCategoryDto(dto);
             category.setId(id);

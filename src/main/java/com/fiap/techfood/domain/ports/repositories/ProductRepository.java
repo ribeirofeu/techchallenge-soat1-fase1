@@ -1,11 +1,9 @@
-package com.fiap.techfood.domain.repository;
+package com.fiap.techfood.domain.ports.repositories;
 
-import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface ProductRepository {
 

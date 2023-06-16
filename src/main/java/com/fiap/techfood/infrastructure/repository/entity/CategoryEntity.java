@@ -14,14 +14,12 @@ import java.util.stream.Collectors;
 @Table(name = "category")
 @NoArgsConstructor
 public class CategoryEntity {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter
   private Long id;
-
+  @Column(nullable = false)
   private String name;
-
   @OneToMany(mappedBy = "category")
   private List<ProductEntity> products;
 

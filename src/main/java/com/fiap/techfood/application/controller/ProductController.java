@@ -1,29 +1,28 @@
 package com.fiap.techfood.application.controller;
 
 import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.dto.ProductDTO;
-import com.fiap.techfood.domain.service.ProductService;
+import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
+import com.fiap.techfood.domain.ports.services.ProductServicePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService service;
+    private final ProductServicePort service;
 
     @Autowired
-    public ProductController(ProductService service) {
+    public ProductController(ProductServicePort service) {
         this.service = service;
     }
 
     @PostMapping
-    ResponseEntity<Long> createProduct (@RequestBody ProductDTO request) {
+    ResponseEntity<Long> createProduct (@RequestBody ProductRequestDTO request) {
         Long id = service.createProduct(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
@@ -45,7 +44,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<String> updateProduct (@RequestBody ProductDTO request, @PathVariable Long id) {
+    ResponseEntity<String> updateProduct (@RequestBody ProductRequestDTO request, @PathVariable Long id) {
         service.updateProduct(id, request);
         return ResponseEntity.ok("Product Updated Successful");
     }

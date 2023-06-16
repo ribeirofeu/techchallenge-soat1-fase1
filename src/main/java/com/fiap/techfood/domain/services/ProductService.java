@@ -1,27 +1,24 @@
-package com.fiap.techfood.domain.service.impl;
+package com.fiap.techfood.domain.services;
 
-import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.dto.ProductDTO;
+import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.repository.ProductRepository;
-import com.fiap.techfood.domain.service.ProductService;
-import org.springframework.dao.DataIntegrityViolationException;
+import com.fiap.techfood.domain.ports.repositories.ProductRepository;
+import com.fiap.techfood.domain.ports.services.ProductServicePort;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
-import java.util.UUID;
 
-public class ProductServiceImpl implements ProductService {
+public class ProductService implements ProductServicePort {
 
   private final ProductRepository repo;
 
-  public ProductServiceImpl(final ProductRepository repo) {
+  public ProductService(final ProductRepository repo) {
     this.repo = repo;
   }
 
   @Override
-  public Long createProduct(ProductDTO dto) {
+  public Long createProduct(ProductRequestDTO dto) {
     Product product = Product.fromProductDTO(dto);
     repo.save(product);
     return product.getId();
@@ -44,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(Long id, ProductDTO dto) {
+    public void updateProduct(Long id, ProductRequestDTO dto) {
           Product product = Product.fromProductDTO(dto);
           product.setId(id);
           repo.updateProduct(product);

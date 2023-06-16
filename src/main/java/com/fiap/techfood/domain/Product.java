@@ -1,11 +1,10 @@
 package com.fiap.techfood.domain;
 
-import com.fiap.techfood.domain.dto.ProductDTO;
+import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
 import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -13,14 +12,14 @@ public class Product {
 
   private Long id;
   private String name;
-  private BigDecimal unitValue;
+  private BigDecimal price;
   private Category category;
   private String description;
 
-  public static Product fromProductDTO(ProductDTO dto) {
+  public static Product fromProductDTO(ProductRequestDTO dto) {
     return Product.builder()
         .name(dto.getName())
-        .unitValue(dto.getUnitValue())
+        .price(dto.getPrice())
         .category(dto.getCategory())
         .description(dto.getDescription())
         .build();

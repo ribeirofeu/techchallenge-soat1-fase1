@@ -1,9 +1,9 @@
 package com.fiap.techfood.infrastructure.configuration;
 
-import com.fiap.techfood.domain.service.CategoryService;
-import com.fiap.techfood.domain.service.ProductService;
-import com.fiap.techfood.domain.service.impl.CategoryServiceImpl;
-import com.fiap.techfood.domain.service.impl.ProductServiceImpl;
+import com.fiap.techfood.domain.ports.services.CategoryServicePort;
+import com.fiap.techfood.domain.ports.services.ProductServicePort;
+import com.fiap.techfood.domain.services.CategoryService;
+import com.fiap.techfood.domain.services.ProductService;
 import com.fiap.techfood.infrastructure.repository.CategoryBdRepository;
 import com.fiap.techfood.infrastructure.repository.ProductBdRepository;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    ProductService productService (ProductBdRepository repository) {
-        return new ProductServiceImpl(repository);
+    ProductServicePort productService (ProductBdRepository repository) {
+        return new ProductService(repository);
     }
 
     @Bean
-    CategoryService categoryService (CategoryBdRepository repository) {
-    return new CategoryServiceImpl(repository);
+    CategoryServicePort categoryService (CategoryBdRepository repository) {
+    return new CategoryService(repository);
     }
 }
