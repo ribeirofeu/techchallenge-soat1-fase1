@@ -47,6 +47,11 @@ public class ProductBdRepository implements ProductRepository {
   }
 
   @Override
+  public List<Product> findAllByIdIn(List<Long> productIds) {
+    return repo.findAllByIdIn(productIds).stream().map(ProductEntity::toProduct).collect(Collectors.toList());
+  }
+
+  @Override
   public void deleteProduct(Long id) {
     try {
       repo.deleteById(id);

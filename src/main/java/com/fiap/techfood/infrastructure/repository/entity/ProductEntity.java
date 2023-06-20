@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+@Getter
 @Entity
 @Table(name = "product")
 @NoArgsConstructor
