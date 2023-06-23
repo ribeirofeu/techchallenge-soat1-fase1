@@ -42,4 +42,8 @@ public class ProductEntity {
             .category(category.toCategory())
             .build();
   }
+
+  public static ProductEntity from(Product product) {
+      return new ProductEntity(product);
+  }
 }

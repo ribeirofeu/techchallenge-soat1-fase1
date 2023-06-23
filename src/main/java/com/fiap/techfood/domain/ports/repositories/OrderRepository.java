@@ -9,15 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderRepository {
-    Order findById(Long id);
+    Optional<Order> findById(Long id);
 
     Order save(Order order);
 
-    List<Order> findAll();
+    void updateOrderStatus(Order order);
 
-    List<Order> findOrdersByStatusAndTimeInterval(OrderStatus orderStatus, OffsetDateTime startDateTime, OffsetDateTime endDateTime);
-
-    void deleteOrder(Long id);
-
-    void updateOrder(Order order);
+    List<Order> findOrdersByStatusAndTimeInterval(OrderStatus status, OffsetDateTime startDateTime, OffsetDateTime endDateTime);
 }

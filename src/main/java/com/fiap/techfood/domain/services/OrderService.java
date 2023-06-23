@@ -5,10 +5,12 @@ import com.fiap.techfood.domain.OrderItem;
 import com.fiap.techfood.domain.OrderStatus;
 import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
+import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
 import com.fiap.techfood.domain.ports.repositories.OrderRepository;
 import com.fiap.techfood.domain.ports.repositories.ProductRepository;
 import com.fiap.techfood.domain.ports.services.OrderServicePort;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.HttpStatus;
 
 import java.math.BigDecimal;
@@ -74,17 +76,21 @@ public class OrderService implements OrderServicePort {
 
     @Override
     public Order updateOrderStatus(Long orderNumber, OrderStatus status) {
-        Order order = repo.findById(orderNumber);
-        if (order == null) {
-            throw new BusinessException("Ordem não encontrada!", HttpStatus.NOT_FOUND);
-        }
+        Order order = repo.findById(orderNumber).orElseThrow(() -> new BusinessException("Ordem não encontrada!", HttpStatus.NOT_FOUND));
         order.setStatus(status);
-        repo.updateOrder(order);
+        repo.updateOrderStatus(order);
         return order;
     }
 
     @Override
-    public List<Order> findOrdersByStatusAndTimeInterval(OrderStatus status, OffsetDateTime startDateTime, OffsetDateTime endDateTime) {
-        return null;
+    public List<Order> findOrdersByStatusAndTimeInterval(SearchOrdersRequestDTO searchOrdersRequestDTO) {
+        var validStartDateTime = ObjectUtils.firstNonNull(searchOrdersRequestDTO.getStartDatetime(), OffsetDateTime.now().minusDays(1));
+        var validEndDateTime = ObjectUtils.firstNonNull(searchOrdersRequestDTO.getEndDatetime(), OffsetDateTime.now());
+
+        if (validEndDateTime.isBefore(validStartDateTime)) {
+            throw new BusinessException("A data final deve ser posterior a data inicial!", HttpStatus.BAD_REQUEST);
+        }
+
+        return repo.findOrdersByStatusAndTimeInterval(searchOrdersRequestDTO.getStatus(), validStartDateTime, validEndDateTime);
     }
 }

@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -24,8 +25,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Entity
+@Setter
 @Builder
+@Entity(name = "Order")
 @Table(name = "`order`")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -61,13 +63,12 @@ public class OrderEntity {
     }
 
     public static OrderEntity from(Order order) {
-        OrderEntity build = OrderEntity.builder()
+        return OrderEntity.builder()
                 .dateTime(order.getDateTime())
                 .notes(order.getNotes())
                 .status(order.getStatus())
                 .totalValue(order.getTotalValue())
                 .build();
-        return build;
     }
 
     public Order toOrder() {

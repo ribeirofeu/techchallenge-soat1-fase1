@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class HandleErrors {
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity handlerError400(HttpMessageNotReadableException ex){
+    public ResponseEntity handlerError400(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderBdRepository implements OrderRepository {
@@ -23,9 +24,9 @@ public class OrderBdRepository implements OrderRepository {
     SpringProductRepository productRepository;
 
     @Override
-    public Order findById(Long id) {
+    public Optional<Order> findById(Long id) {
         Optional<OrderEntity> entity = repo.findById(id);
-        return entity.map(OrderEntity::toOrder).orElse(null);
+        return entity.map(OrderEntity::toOrder);
     }
 
     @Override
@@ -41,22 +42,14 @@ public class OrderBdRepository implements OrderRepository {
     }
 
     @Override
-    public List<Order> findAll() {
-        return null;
+    @Transactional
+    public void updateOrderStatus(Order order) {
+        repo.updateOrderStatus(order.getNumber(), order.getStatus());
     }
 
     @Override
-    public List<Order> findOrdersByStatusAndTimeInterval(OrderStatus orderStatus, OffsetDateTime startDateTime, OffsetDateTime endDateTime) {
-        return null;
-    }
-
-    @Override
-    public void deleteOrder(Long id) {
-
-    }
-
-    @Override
-    public void updateOrder(Order order) {
-
+    public List<Order> findOrdersByStatusAndTimeInterval(OrderStatus status, OffsetDateTime startDateTime, OffsetDateTime endDateTime) {
+        return repo.findAllByStatusIsAndDateTimeBetween(status, startDateTime, endDateTime)
+                .stream().map(OrderEntity::toOrder).collect(Collectors.toList());
     }
 }
