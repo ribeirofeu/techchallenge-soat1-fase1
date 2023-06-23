@@ -23,8 +23,9 @@ public class OrderBdRepository implements OrderRepository {
     SpringProductRepository productRepository;
 
     @Override
-    public Optional<Order> findById(Long id) {
-        return Optional.empty();
+    public Order findById(Long id) {
+        Optional<OrderEntity> entity = repo.findById(id);
+        return entity.map(OrderEntity::toOrder).orElse(null);
     }
 
     @Override

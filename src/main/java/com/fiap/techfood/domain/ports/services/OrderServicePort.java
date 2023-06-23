@@ -10,7 +10,7 @@ import java.util.List;
 public interface OrderServicePort {
     Order createOrder(OrderRequestDTO requestDTO);
 
-    void updateOrderStatus(Long orderNumber, OrderStatus status);
+    Order updateOrderStatus(Long orderNumber, OrderStatus status);
 
     List<Order> findOrdersByStatusAndTimeInterval(OrderStatus status, OffsetDateTime startDateTime, OffsetDateTime endDateTime);
 }

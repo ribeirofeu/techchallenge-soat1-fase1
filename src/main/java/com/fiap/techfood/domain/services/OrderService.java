@@ -45,14 +45,15 @@ public class OrderService implements OrderServicePort {
                 .map(OrderItem::calculateItemTotalValue)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
     private List<OrderItem> buildOrderItems(List<OrderRequestDTO.OrderItemRequestDTO> requestItems, List<Product> products) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for(OrderRequestDTO.OrderItemRequestDTO item : requestItems) {
+        for (OrderRequestDTO.OrderItemRequestDTO item : requestItems) {
             Product currentProduct = products.stream().filter(product -> product.getId().equals(item.getProductId())).findFirst().orElseThrow();
             orderItems.add(OrderItem.builder()
-                            .quantity(item.getQuantity())
-                            .unitPrice(currentProduct.getPrice())
-                            .product(currentProduct)
+                    .quantity(item.getQuantity())
+                    .unitPrice(currentProduct.getPrice())
+                    .product(currentProduct)
                     .build());
         }
         return orderItems;
@@ -72,8 +73,14 @@ public class OrderService implements OrderServicePort {
     }
 
     @Override
-    public void updateOrderStatus(Long orderNumber, OrderStatus status) {
-
+    public Order updateOrderStatus(Long orderNumber, OrderStatus status) {
+        Order order = repo.findById(orderNumber);
+        if (order == null) {
+            throw new BusinessException("Ordem não encontrada!", HttpStatus.NOT_FOUND);
+        }
+        order.setStatus(status);
+        repo.updateOrder(order);
+        return order;
     }
 
     @Override
