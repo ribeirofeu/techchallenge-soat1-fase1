@@ -18,18 +18,14 @@ public class CustomerBdRepository implements CustomerRepository {
     }
 
     @Override
-    public void save(Customer customer) {
+    public Long save(Customer customer) {
         CustomerEntity entity = springCustomerRepository.save(new CustomerEntity(customer));
-        customer.setId(entity.getId());
+        return entity.getId();
     }
 
     @Override
     public Optional<Customer> findByCpf(String cpf) {
         Optional<CustomerEntity> entity = springCustomerRepository.findByCpf(cpf);
-        if (entity.isPresent()) {
-            return Optional.of(entity.get().toCustomer());
-        } else {
-            return Optional.empty();
-        }
+        return entity.map(CustomerEntity::toCustomer);
     }
 }

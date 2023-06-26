@@ -5,7 +5,7 @@ import com.fiap.techfood.domain.Customer;
 import java.util.Optional;
 
 public interface CustomerRepository {
-    void save(Customer customer);
+    Long save(Customer customer);
 
     Optional<Customer> findByCpf(String cpf);
 }

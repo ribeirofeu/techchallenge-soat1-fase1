@@ -20,8 +20,7 @@ public class CustomerService implements CustomerServicePort {
     @Override
     public Long createCustomer(CustomerRequestDTO dto) {
         Customer customer = Customer.fromCustomerDto(dto);
-        customerRepository.save(customer);
-        return customer.getId();
+        return customerRepository.save(customer);
     }
 
     @Override
