@@ -8,6 +8,9 @@ import com.fiap.techfood.domain.services.OrderService;
 import com.fiap.techfood.domain.services.ProductService;
 import com.fiap.techfood.infrastructure.repository.CategoryBdRepository;
 import com.fiap.techfood.infrastructure.repository.OrderBdRepository;
+import com.fiap.techfood.domain.ports.services.CustomerServicePort;
+import com.fiap.techfood.domain.services.CustomerService;
+import com.fiap.techfood.infrastructure.repository.CustomerBdRepository;
 import com.fiap.techfood.infrastructure.repository.ProductBdRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,5 +31,10 @@ public class BeanConfiguration {
     @Bean
     OrderServicePort orderService (OrderBdRepository orderBdRepository, ProductBdRepository productRepository) {
         return new OrderService(orderBdRepository, productRepository);
+    }
+
+    @Bean
+    CustomerServicePort customerService (CustomerBdRepository repository) {
+        return new CustomerService(repository);
     }
 }
