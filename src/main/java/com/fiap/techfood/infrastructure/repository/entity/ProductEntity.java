@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+@Getter
 @Entity
 @Table(name = "product")
 @NoArgsConstructor
@@ -40,5 +41,9 @@ public class ProductEntity {
             .description(description)
             .category(category.toCategory())
             .build();
+  }
+
+  public static ProductEntity from(Product product) {
+      return new ProductEntity(product);
   }
 }
