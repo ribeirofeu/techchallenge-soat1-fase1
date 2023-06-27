@@ -10,6 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Getter
@@ -35,6 +38,10 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
 
     @Column(name = "total_value", nullable = false)
     private BigDecimal totalValue;
@@ -64,6 +71,7 @@ public class OrderEntity {
 
     public static OrderEntity from(Order order) {
         return OrderEntity.builder()
+                .customer(order.getCustomer() != null ? new CustomerEntity(order.getCustomer()) : null)
                 .dateTime(order.getDateTime())
                 .notes(order.getNotes())
                 .status(order.getStatus())
@@ -73,6 +81,7 @@ public class OrderEntity {
 
     public Order toOrder() {
         return Order.builder()
+                .customer(Objects.nonNull(this.customer) ? this.customer.toCustomer() : null)
                 .status(this.status)
                 .totalValue(this.totalValue)
                 .dateTime(this.dateTime)

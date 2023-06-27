@@ -1,5 +1,6 @@
 package com.fiap.techfood.domain.services;
 
+import com.fiap.techfood.domain.Customer;
 import com.fiap.techfood.domain.Order;
 import com.fiap.techfood.domain.OrderItem;
 import com.fiap.techfood.domain.OrderStatus;
@@ -7,6 +8,7 @@ import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
 import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
+import com.fiap.techfood.domain.ports.repositories.CustomerRepository;
 import com.fiap.techfood.domain.ports.repositories.OrderRepository;
 import com.fiap.techfood.domain.ports.repositories.ProductRepository;
 import com.fiap.techfood.domain.ports.services.OrderServicePort;
@@ -23,15 +25,25 @@ public class OrderService implements OrderServicePort {
     private final OrderRepository repo;
     private final ProductRepository productRepository;
 
-    public OrderService(final OrderRepository orderRepository, final ProductRepository productRepository) {
+    private final CustomerRepository customerRepository;
+
+    public OrderService(final OrderRepository orderRepository, final ProductRepository productRepository, final CustomerRepository customerRepository) {
         this.repo = orderRepository;
         this.productRepository = productRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
     public Order createOrder(OrderRequestDTO requestDTO) {
         Order order = Order.fromOrderRequestDTO(requestDTO);
-        order.setStatus(OrderStatus.RECEIVED);
+
+        if (requestDTO.getCustomerId() != null) {
+            Customer customer = customerRepository.findById(requestDTO.getCustomerId())
+                    .orElseThrow(() -> new BusinessException("Customer provided not found", HttpStatus.BAD_REQUEST));
+            order.setCustomer(customer);
+        }
+
+        order.setStatus(OrderStatus.CREATED);
         order.setDateTime(OffsetDateTime.now());
 
         List<Product> products = getAndValidateProducts(getProductIds(requestDTO.getItems()));

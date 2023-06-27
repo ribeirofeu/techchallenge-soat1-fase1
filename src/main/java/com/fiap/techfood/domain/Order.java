@@ -14,6 +14,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Order {
     private Long number;
+    private Customer customer;
     private List<OrderItem> items;
     private BigDecimal totalValue;
     private OrderStatus status;

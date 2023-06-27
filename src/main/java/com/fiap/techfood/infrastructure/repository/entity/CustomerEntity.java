@@ -25,6 +25,7 @@ public class CustomerEntity {
     private String email;
 
     public CustomerEntity(Customer customer) {
+        this.id = customer.getId();
         this.name = customer.getName();
         this.cpf = customer.getCpf();
         this.email = customer.getEmail();

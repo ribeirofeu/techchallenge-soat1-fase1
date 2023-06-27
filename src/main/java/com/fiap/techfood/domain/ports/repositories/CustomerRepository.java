@@ -8,4 +8,6 @@ public interface CustomerRepository {
     Long save(Customer customer);
 
     Optional<Customer> findByCpf(String cpf);
+
+    Optional<Customer> findById(Long id);
 }

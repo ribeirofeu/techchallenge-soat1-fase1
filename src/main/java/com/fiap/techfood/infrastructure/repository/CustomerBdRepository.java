@@ -28,4 +28,9 @@ public class CustomerBdRepository implements CustomerRepository {
         Optional<CustomerEntity> entity = springCustomerRepository.findByCpf(cpf);
         return entity.map(CustomerEntity::toCustomer);
     }
+
+    @Override
+    public Optional<Customer> findById(Long id) {
+        return springCustomerRepository.findById(id).map(CustomerEntity::toCustomer);
+    }
 }

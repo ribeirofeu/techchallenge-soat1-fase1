@@ -29,8 +29,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    OrderServicePort orderService (OrderBdRepository orderBdRepository, ProductBdRepository productRepository) {
-        return new OrderService(orderBdRepository, productRepository);
+    OrderServicePort orderService (OrderBdRepository orderBdRepository, ProductBdRepository productRepository, CustomerBdRepository customerBdRepository) {
+        return new OrderService(orderBdRepository, productRepository, customerBdRepository);
     }
 
     @Bean

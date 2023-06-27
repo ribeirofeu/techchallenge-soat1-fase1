@@ -27,7 +27,7 @@ public class OrderController {
     private OrderServicePort orderService;
 
     @PostMapping
-    ResponseEntity<Order> createCategory(@RequestBody OrderRequestDTO request) {
+    ResponseEntity<Order> createOrder(@RequestBody OrderRequestDTO request) {
         Order order = orderService.createOrder(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }

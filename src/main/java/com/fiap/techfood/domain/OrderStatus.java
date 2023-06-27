@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum OrderStatus {
+    CREATED,
     RECEIVED,
-    PAID,
     IN_PREPARATION,
     READY,
     COMPLETED;
