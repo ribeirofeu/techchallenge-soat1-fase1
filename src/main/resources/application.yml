@@ -10,3 +10,13 @@ spring:
 server:
   error:
     include-stacktrace: never
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: [ "health" ]
+  endpoint:
+    health:
+      show-details: always
