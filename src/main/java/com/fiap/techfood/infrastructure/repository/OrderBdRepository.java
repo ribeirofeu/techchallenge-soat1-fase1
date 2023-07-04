@@ -44,7 +44,7 @@ public class OrderBdRepository implements OrderRepository {
     @Override
     @Transactional
     public void updateOrderStatus(Order order) {
-        repo.updateOrderStatus(order.getNumber(), order.getStatus());
+        repo.save(OrderEntity.from(order));
     }
 
     @Override

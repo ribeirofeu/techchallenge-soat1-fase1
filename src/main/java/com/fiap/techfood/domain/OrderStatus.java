@@ -8,5 +8,6 @@ public enum OrderStatus {
     RECEIVED,
     IN_PREPARATION,
     READY,
-    COMPLETED;
+    COMPLETED,
+    CANCELLED;
 }

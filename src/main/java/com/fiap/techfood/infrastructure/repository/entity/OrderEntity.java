@@ -56,6 +56,9 @@ public class OrderEntity {
     @Column(name = "`notes`")
     private String notes;
 
+    @Column(name = "paymentDate")
+    private OffsetDateTime paymentDate;
+
     @OneToMany(
             mappedBy = "order",
             cascade = CascadeType.ALL,
@@ -71,11 +74,13 @@ public class OrderEntity {
 
     public static OrderEntity from(Order order) {
         return OrderEntity.builder()
+                .id(order.getNumber())
                 .customer(order.getCustomer() != null ? new CustomerEntity(order.getCustomer()) : null)
                 .dateTime(order.getDateTime())
                 .notes(order.getNotes())
                 .status(order.getStatus())
                 .totalValue(order.getTotalValue())
+                .paymentDate(order.getPaymentDate())
                 .build();
     }
 
@@ -87,6 +92,7 @@ public class OrderEntity {
                 .dateTime(this.dateTime)
                 .number(this.id)
                 .notes(this.getNotes())
+                .paymentDate(this.paymentDate)
                 .items(this.items.stream().map(OrderItemEntity::toOrderItem).collect(Collectors.toList()))
                 .build();
     }

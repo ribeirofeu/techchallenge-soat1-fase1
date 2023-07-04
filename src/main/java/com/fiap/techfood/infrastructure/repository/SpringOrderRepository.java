@@ -14,10 +14,6 @@ import java.util.List;
 
 @Repository
 public interface SpringOrderRepository extends JpaRepository<OrderEntity, Long> {
-    @Modifying
-    @Query("update Order o set o.status = :status where o.id = :id")
-    void updateOrderStatus(@Param(value = "id") long id, @Param(value = "status") OrderStatus status);
-
     @EntityGraph(attributePaths = { "items", "items.product", "items.product.category" })
     List<OrderEntity> findAllByStatusIsAndDateTimeBetween(OrderStatus status, OffsetDateTime startDateTime, OffsetDateTime endDateTime);
 }

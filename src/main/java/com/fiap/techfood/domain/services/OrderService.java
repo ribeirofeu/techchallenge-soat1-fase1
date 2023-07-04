@@ -87,9 +87,14 @@ public class OrderService implements OrderServicePort {
     }
 
     @Override
-    public Order updateOrderStatus(Long orderNumber, OrderStatus status) {
+    public Order updateOrderStatus(Long orderNumber, OrderStatus status, OffsetDateTime paymentDate) {
         Order order = repo.findById(orderNumber).orElseThrow(() -> new BusinessException("Ordem não encontrada!", HttpStatus.NOT_FOUND));
         order.setStatus(status);
+
+        if (paymentDate != null) {
+            order.setPaymentDate(paymentDate);
+        }
+
         repo.updateOrderStatus(order);
         return order;
     }
