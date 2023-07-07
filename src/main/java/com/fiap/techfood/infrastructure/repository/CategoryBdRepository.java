@@ -27,11 +27,7 @@ public class CategoryBdRepository implements CategoryRepository {
   public Optional<Category> findById(Long id) {
     Optional<CategoryEntity> entity = repo.findById(id);
 
-    if (entity.isPresent()) {
-      return Optional.of(entity.get().toCategory());
-    } else {
-      return Optional.empty();
-    }
+      return entity.map(CategoryEntity::toCategory);
   }
 
   @Override

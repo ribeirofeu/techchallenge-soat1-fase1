@@ -10,9 +10,7 @@ public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorResponse> handlerBusinessException(BusinessException be) {
-        ErrorResponse errorResponse = new ErrorResponse(be.getMessage(), "");
+        ErrorResponse errorResponse = new ErrorResponse(be.getMessage());
         return ResponseEntity.status(be.getHttpStatus()).body(errorResponse);
     }
-
-
 }

@@ -1,8 +1,10 @@
 package com.fiap.techfood.domain.services;
 
+import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
+import com.fiap.techfood.domain.ports.repositories.CategoryRepository;
 import com.fiap.techfood.domain.ports.repositories.ProductRepository;
 import com.fiap.techfood.domain.ports.services.ProductServicePort;
 import org.springframework.http.HttpStatus;
@@ -13,13 +15,24 @@ public class ProductService implements ProductServicePort {
 
   private final ProductRepository repo;
 
-  public ProductService(final ProductRepository repo) {
+  private final CategoryRepository categoryRepository;
+
+  public ProductService(final ProductRepository repo, CategoryRepository categoryRepository) {
     this.repo = repo;
+    this.categoryRepository = categoryRepository;
   }
 
   @Override
   public Long createProduct(ProductRequestDTO dto) {
     Product product = Product.fromProductDTO(dto);
+
+    Category category =
+        categoryRepository
+            .findById(dto.getCategoryId())
+            .orElseThrow(
+                () -> new BusinessException("Invalid Category ID", HttpStatus.BAD_REQUEST));
+    product.setCategory(category);
+
     repo.save(product);
     return product.getId();
   }
@@ -40,10 +53,17 @@ public class ProductService implements ProductServicePort {
         repo.deleteProduct(id);
     }
 
-    @Override
-    public void updateProduct(Long id, ProductRequestDTO dto) {
-          Product product = Product.fromProductDTO(dto);
-          product.setId(id);
-          repo.updateProduct(product);
-    }
+  @Override
+  public void updateProduct(Long id, ProductRequestDTO dto) {
+    Product product = Product.fromProductDTO(dto);
+    product.setId(id);
+
+    Category category =
+        categoryRepository
+            .findById(dto.getCategoryId())
+            .orElseThrow(
+                () -> new BusinessException("Invalid Category ID", HttpStatus.BAD_REQUEST));
+    product.setCategory(category);
+    repo.updateProduct(product);
+  }
 }

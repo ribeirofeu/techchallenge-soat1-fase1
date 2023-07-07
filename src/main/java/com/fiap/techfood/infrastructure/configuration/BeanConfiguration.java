@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    ProductServicePort productService (ProductBdRepository repository) {
-        return new ProductService(repository);
+    ProductServicePort productService (ProductBdRepository repository, CategoryBdRepository categoryRepository) {
+        return new ProductService(repository, categoryRepository);
     }
 
     @Bean

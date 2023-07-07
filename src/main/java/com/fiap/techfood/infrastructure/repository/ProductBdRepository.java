@@ -26,11 +26,7 @@ public class ProductBdRepository implements ProductRepository {
   public Optional<Product> findById(Long id) {
     Optional<ProductEntity> entity = repo.findById(id);
 
-    if (entity.isPresent()) {
-      return Optional.of(entity.get().toProduct());
-    } else {
-      return Optional.empty();
-    }
+      return entity.map(ProductEntity::toProduct);
   }
 
   @Override
@@ -66,7 +62,7 @@ public class ProductBdRepository implements ProductRepository {
       ProductEntity entity = new ProductEntity(product);
       repo.save(entity);
     } catch (DataIntegrityViolationException e) {
-      throw new BusinessException("Product ID invalid", HttpStatus.NOT_FOUND);
+      throw new BusinessException("Error updating Product", HttpStatus.BAD_REQUEST);
     }
   }
 }

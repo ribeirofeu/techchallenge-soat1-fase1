@@ -20,8 +20,8 @@ public class Product {
     return Product.builder()
         .name(dto.getName())
         .price(dto.getPrice())
-        .category(dto.getCategory())
         .description(dto.getDescription())
         .build();
   }
+
 }
