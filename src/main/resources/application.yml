@@ -17,6 +17,10 @@ management:
       base-path: /actuator
       exposure:
         include: [ "health" ]
-  endpoint:
     health:
       show-details: always
+      sensitive: false
+      defaults:
+        enabled: true
+      db:
+        enabled:true

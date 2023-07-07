@@ -1,21 +1,12 @@
 package com.fiap.techfood.application.controller;
 
-import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.ports.services.ProductServicePort;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 @Component
 public class HealthCheckController implements HealthIndicator {
 
-    private final ProductServicePort service;
-
-    public HealthCheckController(ProductServicePort service) {
-        this.service = service;
-    }
-
+    public HealthCheckController() { }
 
     @Override
     public Health getHealth(boolean includeDetails) {
@@ -24,11 +15,6 @@ public class HealthCheckController implements HealthIndicator {
 
     @Override
     public Health health() {
-        try{
-            List<Product> products = service.findAllProducts();
-            return Health.up().withDetail("Total products:", products.size()).build();
-        }catch (Exception e){
-            return Health.down().withDetail("Total products:", 0).build();
-        }
+        return Health.up().build();
     }
 }
