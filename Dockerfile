@@ -1,20 +1,11 @@
-FROM adoptopenjdk:17-jdk-hotspot
+FROM maven:3.9.3-amazoncorretto-17
 
 WORKDIR /app
 
-COPY pom.xml .
+COPY . .
 
 RUN mvn dependency:go-offline
 
-COPY src ./src
-
 RUN mvn package -DskipTests
 
-CMD [
-    "java",
-    "-jar",
-    "target/nome-do-seu-arquivo-jar.jar",
-    "--spring.datasource.url=jdbc:mysql://db:3306/database",
-    "--spring.datasource.username=user",
-    "--spring.datasource.password=password"
-]
+CMD ["java", "-jar", "target/techfood-0.0.1-SNAPSHOT.jar"]

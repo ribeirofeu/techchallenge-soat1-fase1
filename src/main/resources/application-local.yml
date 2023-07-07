@@ -2,7 +2,7 @@ mysql:
   username: techfood
   password: techfood
   database: techfood
-  url: localhost:3306
+  url: db:3306
 
 spring:
   jpa:
