@@ -25,6 +25,12 @@ Se você está rodando o projeto pela primeira vez, execute:
 make build
 ```
 
+Caso o comando `make` não funcione, execute o comando
+
+```
+docker-compose up -d --build
+```
+
 ## ☕ Rodando o projeto
 
 Verifique se os seguintes containers estão rodando com o comando `make status`:
@@ -46,6 +52,18 @@ Verifique se os seguintes containers estão rodando com o comando `make status`:
 | `make up `      | Levantar os containers          |
 | `make down `    | Derrubar os containers          |
 
+
+Caso o comando `make` não funcione, execute o seguinte comando para levantar os containers:
+
+```
+docker-compose up -d
+```
+
+E o seguinte comando para derrubar os containers
+
+```
+docker-compose down
+```
 
 ## 📫 Contribuindo para o projeto
 
