@@ -2,9 +2,11 @@ package com.fiap.techfood.infrastructure.configuration;
 
 import com.fiap.techfood.domain.ports.services.CategoryServicePort;
 import com.fiap.techfood.domain.ports.services.OrderServicePort;
+import com.fiap.techfood.domain.ports.services.PaymentServicePort;
 import com.fiap.techfood.domain.ports.services.ProductServicePort;
 import com.fiap.techfood.domain.services.CategoryService;
 import com.fiap.techfood.domain.services.OrderService;
+import com.fiap.techfood.domain.services.PaymentService;
 import com.fiap.techfood.domain.services.ProductService;
 import com.fiap.techfood.infrastructure.repository.CategoryBdRepository;
 import com.fiap.techfood.infrastructure.repository.OrderBdRepository;
@@ -29,8 +31,13 @@ public class BeanConfiguration {
     }
 
     @Bean
-    OrderServicePort orderService (OrderBdRepository orderBdRepository, ProductBdRepository productRepository, CustomerBdRepository customerBdRepository) {
-        return new OrderService(orderBdRepository, productRepository, customerBdRepository);
+    OrderServicePort orderService (OrderBdRepository orderBdRepository, ProductBdRepository productRepository, CustomerBdRepository customerBdRepository, PaymentServicePort paymentService) {
+        return new OrderService(orderBdRepository, productRepository, customerBdRepository, paymentService);
+    }
+
+    @Bean
+    PaymentServicePort paymentService() {
+        return new PaymentService();
     }
 
     @Bean

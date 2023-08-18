@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,6 +57,9 @@ public class OrderEntity {
     @Column(name = "`notes`")
     private String notes;
 
+    @Transient
+    private String qrCode;
+
     @OneToMany(
             mappedBy = "order",
             cascade = CascadeType.ALL,
@@ -76,6 +80,7 @@ public class OrderEntity {
                 .notes(order.getNotes())
                 .status(order.getStatus())
                 .totalValue(order.getTotalValue())
+                .qrCode(order.getQrCode())
                 .build();
     }
 
@@ -87,6 +92,7 @@ public class OrderEntity {
                 .dateTime(this.dateTime)
                 .number(this.id)
                 .notes(this.getNotes())
+                .qrCode(this.getQrCode())
                 .items(this.items.stream().map(OrderItemEntity::toOrderItem).collect(Collectors.toList()))
                 .build();
     }

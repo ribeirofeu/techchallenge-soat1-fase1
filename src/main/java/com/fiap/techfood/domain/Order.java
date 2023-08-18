@@ -20,6 +20,7 @@ public class Order {
     private OrderStatus status;
     private OffsetDateTime dateTime;
     private String notes;
+    private String qrCode;
 
     public static Order fromOrderRequestDTO(OrderRequestDTO requestDTO) {
         return Order.builder()

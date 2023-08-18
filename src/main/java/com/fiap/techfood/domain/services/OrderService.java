@@ -12,6 +12,7 @@ import com.fiap.techfood.domain.ports.repositories.CustomerRepository;
 import com.fiap.techfood.domain.ports.repositories.OrderRepository;
 import com.fiap.techfood.domain.ports.repositories.ProductRepository;
 import com.fiap.techfood.domain.ports.services.OrderServicePort;
+import com.fiap.techfood.domain.ports.services.PaymentServicePort;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.HttpStatus;
 
@@ -27,10 +28,14 @@ public class OrderService implements OrderServicePort {
 
     private final CustomerRepository customerRepository;
 
-    public OrderService(final OrderRepository orderRepository, final ProductRepository productRepository, final CustomerRepository customerRepository) {
+    private final PaymentServicePort paymentService;
+
+    public OrderService(final OrderRepository orderRepository, final ProductRepository productRepository,
+                        final CustomerRepository customerRepository, final PaymentServicePort paymentService) {
         this.repo = orderRepository;
         this.productRepository = productRepository;
         this.customerRepository = customerRepository;
+        this.paymentService = paymentService;
     }
 
     @Override
@@ -50,6 +55,7 @@ public class OrderService implements OrderServicePort {
         List<OrderItem> orderItems = buildOrderItems(requestDTO.getItems(), products);
         order.setItems(orderItems);
         order.setTotalValue(calculateOrderTotalValue(orderItems));
+        order.setQrCode(this.paymentService.getPaymentQRCode(order));
 
         return repo.save(order);
     }
