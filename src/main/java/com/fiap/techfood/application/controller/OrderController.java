@@ -4,6 +4,7 @@ import com.fiap.techfood.domain.Order;
 import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
 import com.fiap.techfood.domain.dto.request.OrderStatusRequestDTO;
 import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
+import com.fiap.techfood.domain.dto.response.OrderPaymentStatusDTO;
 import com.fiap.techfood.domain.ports.services.OrderServicePort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,5 +48,11 @@ public class OrderController {
     @Operation(summary = "Lista todos os pedidos a partir de um status e um intervalo de tempo")
     ResponseEntity<List<Order>> findOrdersByStatusAndTimeInterval(@Valid SearchOrdersRequestDTO searchOrdersRequestDTO) {
         return ResponseEntity.ok(orderService.findOrdersByStatusAndTimeInterval(searchOrdersRequestDTO));
+    }
+
+    @GetMapping("/{orderNumber}/payment/status")
+    @Operation(summary = "Envia o status do pagamento do pedido")
+    ResponseEntity<OrderPaymentStatusDTO> findOrdersByStatusAndTimeInterval(Long orderNumber) {
+        return ResponseEntity.ok(orderService.getOrderPaymentStatus(orderNumber));
     }
 }

@@ -1,12 +1,9 @@
 package com.fiap.techfood.domain.services;
 
-import com.fiap.techfood.domain.Customer;
-import com.fiap.techfood.domain.Order;
-import com.fiap.techfood.domain.OrderItem;
-import com.fiap.techfood.domain.OrderStatus;
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.*;
 import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
 import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
+import com.fiap.techfood.domain.dto.response.OrderPaymentStatusDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
 import com.fiap.techfood.domain.ports.repositories.CustomerRepository;
 import com.fiap.techfood.domain.ports.repositories.OrderRepository;
@@ -110,5 +107,18 @@ public class OrderService implements OrderServicePort {
         }
 
         return repo.findOrdersByStatusAndTimeInterval(searchOrdersRequestDTO.getStatus(), validStartDateTime, validEndDateTime);
+    }
+
+    @Override
+    public OrderPaymentStatusDTO getOrderPaymentStatus(Long orderNumber) {
+        Order order = repo.findById(orderNumber).orElseThrow(() -> new BusinessException("Ordem não encontrada!", HttpStatus.NOT_FOUND));
+
+        if(order.getStatus() == OrderStatus.REJECTED) {
+            return OrderPaymentStatusDTO.builder().status(OrderPaymentStatus.REJECTED).build();
+        } else if (order.getStatus() != OrderStatus.CREATED) {
+            return OrderPaymentStatusDTO.builder().status(OrderPaymentStatus.APPROVED).build();
+        }
+
+        return OrderPaymentStatusDTO.builder().status(OrderPaymentStatus.PENDING).build();
     }
 }
