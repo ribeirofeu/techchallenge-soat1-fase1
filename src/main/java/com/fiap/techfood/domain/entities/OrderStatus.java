@@ -1,8 +1,5 @@
-package com.fiap.techfood.domain;
+package com.fiap.techfood.domain.entities;
 
-import lombok.Getter;
-
-@Getter
 public enum OrderStatus {
     CREATED,
     RECEIVED,

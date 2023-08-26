@@ -1,6 +1,6 @@
-package com.fiap.techfood.domain.ports.repositories;
+package com.fiap.techfood.domain.interfaces.gateway;
 
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.entities.Product;
 
 import java.util.List;
 import java.util.Optional;

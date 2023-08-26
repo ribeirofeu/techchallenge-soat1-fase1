@@ -1,8 +1,8 @@
 package com.fiap.techfood.application.controller;
 
-import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
-import com.fiap.techfood.domain.ports.services.ProductServicePort;
+import com.fiap.techfood.domain.entities.Product;
+import com.fiap.techfood.domain.interfaces.usecases.IProductUseCases;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,30 +17,30 @@ import java.util.List;
 @Tag(name = "Produtos")
 public class ProductController {
 
-    private final ProductServicePort service;
+    private final IProductUseCases service;
 
     @Autowired
-    public ProductController(ProductServicePort service) {
+    public ProductController(IProductUseCases service) {
         this.service = service;
     }
 
     @PostMapping
     @Operation(summary = "Cria um produto")
-    ResponseEntity<Long> createProduct (@RequestBody ProductRequestDTO request) {
+    ResponseEntity<Long> createProduct(@RequestBody ProductRequestDTO request) {
         Long id = service.createProduct(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Retorna os dados de um produto")
-    ResponseEntity<Product> findProduct (@PathVariable Long id) {
-       return  ResponseEntity.ok(service.findProductById(id));
+    ResponseEntity<Product> findProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findProductById(id));
     }
 
     @GetMapping()
     @Operation(summary = "Lista todos os produtos")
-    ResponseEntity<List<Product>> findAllProducts () {
-        return  ResponseEntity.ok(service.findAllProducts());
+    ResponseEntity<List<Product>> findAllProducts() {
+        return ResponseEntity.ok(service.findAllProducts());
     }
 
     @DeleteMapping("/{id}")
@@ -52,7 +52,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza um produto")
-    ResponseEntity<String> updateProduct (@RequestBody ProductRequestDTO request, @PathVariable Long id) {
+    ResponseEntity<String> updateProduct(@RequestBody ProductRequestDTO request, @PathVariable Long id) {
         service.updateProduct(id, request);
         return ResponseEntity.ok("Product Updated Successful");
     }

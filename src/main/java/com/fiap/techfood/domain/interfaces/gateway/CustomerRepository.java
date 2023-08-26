@@ -1,6 +1,6 @@
-package com.fiap.techfood.domain.ports.repositories;
+package com.fiap.techfood.domain.interfaces.gateway;
 
-import com.fiap.techfood.domain.Customer;
+import com.fiap.techfood.domain.entities.Customer;
 
 import java.util.Optional;
 

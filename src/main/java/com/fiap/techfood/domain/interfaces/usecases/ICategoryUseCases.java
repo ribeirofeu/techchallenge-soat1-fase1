@@ -1,14 +1,13 @@
-package com.fiap.techfood.domain.ports.services;
+package com.fiap.techfood.domain.interfaces.usecases;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.dto.request.CategoryRequestDTO;
+import com.fiap.techfood.domain.entities.Category;
+import com.fiap.techfood.domain.entities.Product;
 
 import java.util.List;
 
-public interface CategoryServicePort {
-
-    Long createCategory(CategoryRequestDTO dto) ;
+public interface ICategoryUseCases {
+    Long createCategory(CategoryRequestDTO dto);
 
     Category findCategoryById(Long id);
 
@@ -19,5 +18,4 @@ public interface CategoryServicePort {
     void deleteCategory(Long id);
 
     void updateCategory(Long id, CategoryRequestDTO dto);
-
 }

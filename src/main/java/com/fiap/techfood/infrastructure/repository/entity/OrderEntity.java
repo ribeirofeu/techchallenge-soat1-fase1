@@ -1,7 +1,7 @@
 package com.fiap.techfood.infrastructure.repository.entity;
 
-import com.fiap.techfood.domain.Order;
-import com.fiap.techfood.domain.OrderStatus;
+import com.fiap.techfood.domain.entities.Order;
+import com.fiap.techfood.domain.entities.OrderStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -80,14 +80,14 @@ public class OrderEntity {
     }
 
     public Order toOrder() {
-        return Order.builder()
-                .customer(Objects.nonNull(this.customer) ? this.customer.toCustomer() : null)
-                .status(this.status)
-                .totalValue(this.totalValue)
-                .dateTime(this.dateTime)
-                .number(this.id)
-                .notes(this.getNotes())
-                .items(this.items.stream().map(OrderItemEntity::toOrderItem).collect(Collectors.toList()))
-                .build();
+        Order order = new Order();
+        order.setCustomer(Objects.nonNull(this.customer) ? this.customer.toCustomer() : null);
+        order.setStatus(this.status);
+        order.setTotalValue(this.totalValue);
+        order.setDateTime(this.dateTime);
+        order.setNumber(this.id);
+        order.setNotes(this.getNotes());
+        order.setItems(this.items.stream().map(OrderItemEntity::toOrderItem).collect(Collectors.toList()));
+        return order;
     }
 }

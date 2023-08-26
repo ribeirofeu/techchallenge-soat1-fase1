@@ -1,24 +1,19 @@
 package com.fiap.techfood.application.controller;
 
-import com.fiap.techfood.domain.Order;
 import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
 import com.fiap.techfood.domain.dto.request.OrderStatusRequestDTO;
-import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
-import com.fiap.techfood.domain.ports.services.OrderServicePort;
+import com.fiap.techfood.domain.entities.Order;
+import com.fiap.techfood.domain.entities.OrderStatus;
+import com.fiap.techfood.domain.interfaces.usecases.IOrderUseCases;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @RestController
@@ -27,7 +22,7 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private OrderServicePort orderService;
+    private IOrderUseCases orderService;
 
     @PostMapping
     @Operation(summary = "Cria um pedido")
@@ -45,7 +40,11 @@ public class OrderController {
 
     @GetMapping("/")
     @Operation(summary = "Lista todos os pedidos a partir de um status e um intervalo de tempo")
-    ResponseEntity<List<Order>> findOrdersByStatusAndTimeInterval(@Valid SearchOrdersRequestDTO searchOrdersRequestDTO) {
-        return ResponseEntity.ok(orderService.findOrdersByStatusAndTimeInterval(searchOrdersRequestDTO));
+    ResponseEntity<List<Order>> findOrdersByStatusAndTimeInterval(@RequestParam OrderStatus status,
+                                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                                  OffsetDateTime startDatetime,
+                                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                                  OffsetDateTime endDatetime) {
+        return ResponseEntity.ok(orderService.findOrdersByStatusAndTimeInterval(status, startDatetime, endDatetime));
     }
 }

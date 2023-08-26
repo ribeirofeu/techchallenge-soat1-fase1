@@ -1,13 +1,12 @@
-package com.fiap.techfood.domain.ports.services;
+package com.fiap.techfood.domain.interfaces.usecases;
 
-import com.fiap.techfood.domain.Product;
 import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
+import com.fiap.techfood.domain.entities.Product;
 
 import java.util.List;
 
-public interface ProductServicePort {
-
-    Long createProduct(ProductRequestDTO dto) ;
+public interface IProductUseCases {
+    Long createProduct(ProductRequestDTO dto);
 
     Product findProductById(Long id);
 
@@ -16,5 +15,4 @@ public interface ProductServicePort {
     void deleteProduct(Long id);
 
     void updateProduct(Long id, ProductRequestDTO dto);
-
 }

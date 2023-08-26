@@ -1,6 +1,6 @@
 package com.fiap.techfood.infrastructure.repository;
 
-import com.fiap.techfood.domain.OrderStatus;
+import com.fiap.techfood.domain.entities.OrderStatus;
 import com.fiap.techfood.infrastructure.repository.entity.OrderEntity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

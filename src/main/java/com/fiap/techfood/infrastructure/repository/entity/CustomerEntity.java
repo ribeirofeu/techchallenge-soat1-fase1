@@ -1,11 +1,7 @@
 package com.fiap.techfood.infrastructure.repository.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fiap.techfood.domain.Customer;
-import com.fiap.techfood.domain.dto.request.CustomerRequestDTO;
+import com.fiap.techfood.domain.entities.Customer;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +27,11 @@ public class CustomerEntity {
         this.email = customer.getEmail();
     }
     public Customer toCustomer() {
-        return Customer.builder().id(id).name(name).cpf(cpf).email(email).build();
+        Customer customer = new Customer();
+        customer.setId(id);
+        customer.setName(name);
+        customer.setCpf(cpf);
+        customer.setEmail(email);
+        return customer;
     }
 }

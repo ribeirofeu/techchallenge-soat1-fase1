@@ -1,13 +1,12 @@
 package com.fiap.techfood.infrastructure.repository.entity;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.entities.Category;
+import com.fiap.techfood.domain.entities.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Entity
@@ -29,7 +28,10 @@ public class CategoryEntity {
   }
 
   public Category toCategory() {
-    return Category.builder().id(id).name(name).build();
+    Category category = new Category();
+    category.setId(id);
+    category.setName(name);
+    return category;
   }
 
   public List<Product> getProducts() {

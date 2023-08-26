@@ -1,6 +1,7 @@
 package com.fiap.techfood.infrastructure.repository.entity;
 
-import com.fiap.techfood.domain.OrderItem;
+import com.fiap.techfood.domain.entities.Order;
+import com.fiap.techfood.domain.entities.OrderItem;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -46,11 +47,11 @@ public class OrderItemEntity {
     }
 
     public OrderItem toOrderItem() {
-        return OrderItem.builder()
-                .product(this.product.toProduct())
-                .unitPrice(this.unitPrice)
-                .quantity(this.quantity)
-                .build();
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(this.product.toProduct());
+        orderItem.setUnitPrice(this.unitPrice);
+        orderItem.setQuantity(this.quantity);
+        return orderItem;
     }
 
     public static OrderItemEntity from(OrderItem orderItem) {

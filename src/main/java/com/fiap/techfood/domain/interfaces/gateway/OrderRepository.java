@@ -1,8 +1,8 @@
-package com.fiap.techfood.domain.ports.repositories;
+package com.fiap.techfood.domain.interfaces.gateway;
 
 
-import com.fiap.techfood.domain.Order;
-import com.fiap.techfood.domain.OrderStatus;
+import com.fiap.techfood.domain.entities.Order;
+import com.fiap.techfood.domain.entities.OrderStatus;
 
 import java.time.OffsetDateTime;
 import java.util.List;
