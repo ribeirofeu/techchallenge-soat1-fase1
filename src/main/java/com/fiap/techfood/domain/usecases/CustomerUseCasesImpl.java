@@ -4,15 +4,15 @@ import com.fiap.techfood.domain.dto.request.CustomerRequestDTO;
 import com.fiap.techfood.domain.entities.Customer;
 import com.fiap.techfood.domain.exception.BusinessException;
 import com.fiap.techfood.domain.interfaces.gateway.CustomerRepository;
-import com.fiap.techfood.domain.interfaces.usecases.ICustomerUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.CustomerUseCases;
 
 import java.util.Optional;
 
-public class CustomerUseCases implements ICustomerUseCases {
+public class CustomerUseCasesImpl implements CustomerUseCases {
 
     private final CustomerRepository repo;
 
-    public CustomerUseCases(CustomerRepository repo) {
+    public CustomerUseCasesImpl(CustomerRepository repo) {
         this.repo = repo;
     }
 

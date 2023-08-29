@@ -1,4 +1,4 @@
-package com.fiap.techfood.application.handler.model;
+package com.fiap.techfood.infrastructure.controller.model;
 
 import lombok.Data;
 

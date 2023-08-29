@@ -1,4 +1,4 @@
-package com.fiap.techfood.application.handler.exception;
+package com.fiap.techfood.infrastructure.controller.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

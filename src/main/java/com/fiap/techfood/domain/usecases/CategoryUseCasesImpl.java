@@ -5,15 +5,15 @@ import com.fiap.techfood.domain.entities.Category;
 import com.fiap.techfood.domain.entities.Product;
 import com.fiap.techfood.domain.exception.BusinessException;
 import com.fiap.techfood.domain.interfaces.gateway.CategoryRepository;
-import com.fiap.techfood.domain.interfaces.usecases.ICategoryUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.CategoryUseCases;
 
 import java.util.List;
 
-public class CategoryUseCases implements ICategoryUseCases {
+public class CategoryUseCasesImpl implements CategoryUseCases {
 
     private final CategoryRepository repo;
 
-    public CategoryUseCases(final CategoryRepository repo) {
+    public CategoryUseCasesImpl(final CategoryRepository repo) {
         this.repo = repo;
     }
 

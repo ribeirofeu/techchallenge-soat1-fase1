@@ -6,17 +6,17 @@ import com.fiap.techfood.domain.entities.Product;
 import com.fiap.techfood.domain.exception.BusinessException;
 import com.fiap.techfood.domain.interfaces.gateway.CategoryRepository;
 import com.fiap.techfood.domain.interfaces.gateway.ProductRepository;
-import com.fiap.techfood.domain.interfaces.usecases.IProductUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.ProductUseCases;
 
 import java.util.List;
 
-public class ProductUseCases implements IProductUseCases {
+public class ProductUseCasesImpl implements ProductUseCases {
 
     private final ProductRepository repo;
 
     private final CategoryRepository categoryRepository;
 
-    public ProductUseCases(final ProductRepository repo, CategoryRepository categoryRepository) {
+    public ProductUseCasesImpl(final ProductRepository repo, CategoryRepository categoryRepository) {
         this.repo = repo;
         this.categoryRepository = categoryRepository;
     }

@@ -1,10 +1,10 @@
-package com.fiap.techfood.application.controller;
+package com.fiap.techfood.infrastructure.controller;
 
 import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
 import com.fiap.techfood.domain.dto.request.OrderStatusRequestDTO;
 import com.fiap.techfood.domain.entities.Order;
 import com.fiap.techfood.domain.entities.OrderStatus;
-import com.fiap.techfood.domain.interfaces.usecases.IOrderUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.OrderUseCases;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +22,19 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private IOrderUseCases orderService;
+    private OrderUseCases useCases;
 
     @PostMapping
     @Operation(summary = "Cria um pedido")
     ResponseEntity<Order> createOrder(@RequestBody OrderRequestDTO request) {
-        Order order = orderService.createOrder(request);
+        Order order = useCases.createOrder(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 
     @PatchMapping("/{orderNumber}")
     @Operation(summary = "Atualiza o status de um pedido")
     ResponseEntity<Order> updateOrder(@PathVariable Long orderNumber, @RequestBody OrderStatusRequestDTO orderStatusRequestDTO) {
-        Order order = orderService.updateOrderStatus(orderNumber, orderStatusRequestDTO.status());
+        Order order = useCases.updateOrderStatus(orderNumber, orderStatusRequestDTO.status());
         return ResponseEntity.status(HttpStatus.OK).body(order);
     }
 
@@ -45,6 +45,6 @@ public class OrderController {
                                                                   OffsetDateTime startDatetime,
                                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                                                                   OffsetDateTime endDatetime) {
-        return ResponseEntity.ok(orderService.findOrdersByStatusAndTimeInterval(status, startDatetime, endDatetime));
+        return ResponseEntity.ok(useCases.findOrdersByStatusAndTimeInterval(status, startDatetime, endDatetime));
     }
 }

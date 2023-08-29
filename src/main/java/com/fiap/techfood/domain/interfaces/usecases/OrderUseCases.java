@@ -7,7 +7,7 @@ import com.fiap.techfood.domain.entities.OrderStatus;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public interface IOrderUseCases {
+public interface OrderUseCases {
     Order createOrder(OrderRequestDTO requestDTO);
 
     Order updateOrderStatus(Long orderNumber, OrderStatus status);

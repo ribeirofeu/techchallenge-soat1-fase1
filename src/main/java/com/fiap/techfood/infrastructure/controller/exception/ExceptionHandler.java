@@ -1,6 +1,6 @@
-package com.fiap.techfood.application.handler;
+package com.fiap.techfood.infrastructure.controller.exception;
 
-import com.fiap.techfood.application.handler.model.ErrorResponse;
+import com.fiap.techfood.infrastructure.controller.model.ErrorResponse;
 import com.fiap.techfood.domain.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

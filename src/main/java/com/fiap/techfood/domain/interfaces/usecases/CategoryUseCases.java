@@ -6,7 +6,7 @@ import com.fiap.techfood.domain.entities.Product;
 
 import java.util.List;
 
-public interface ICategoryUseCases {
+public interface CategoryUseCases {
     Long createCategory(CategoryRequestDTO dto);
 
     Category findCategoryById(Long id);

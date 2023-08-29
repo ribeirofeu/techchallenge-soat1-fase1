@@ -6,7 +6,7 @@ import com.fiap.techfood.domain.exception.BusinessException;
 import com.fiap.techfood.domain.interfaces.gateway.CustomerRepository;
 import com.fiap.techfood.domain.interfaces.gateway.OrderRepository;
 import com.fiap.techfood.domain.interfaces.gateway.ProductRepository;
-import com.fiap.techfood.domain.interfaces.usecases.IOrderUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.OrderUseCases;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderUseCases implements IOrderUseCases {
+public class OrderUseCasesImpl implements OrderUseCases {
 
     private final OrderRepository repo;
     private final ProductRepository productRepository;
     private final CustomerRepository customerRepository;
 
-    public OrderUseCases(final OrderRepository orderRepository,
-                         final ProductRepository productRepository,
-                         final CustomerRepository customerRepository) {
+    public OrderUseCasesImpl(final OrderRepository orderRepository,
+                             final ProductRepository productRepository,
+                             final CustomerRepository customerRepository) {
         this.repo = orderRepository;
         this.productRepository = productRepository;
         this.customerRepository = customerRepository;

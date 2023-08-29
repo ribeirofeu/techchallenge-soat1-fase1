@@ -5,7 +5,7 @@ import com.fiap.techfood.domain.entities.Product;
 
 import java.util.List;
 
-public interface IProductUseCases {
+public interface ProductUseCases {
     Long createProduct(ProductRequestDTO dto);
 
     Product findProductById(Long id);

@@ -1,13 +1,13 @@
 package com.fiap.techfood.infrastructure.configuration;
 
-import com.fiap.techfood.domain.interfaces.usecases.ICategoryUseCases;
-import com.fiap.techfood.domain.interfaces.usecases.ICustomerUseCases;
-import com.fiap.techfood.domain.interfaces.usecases.IOrderUseCases;
-import com.fiap.techfood.domain.interfaces.usecases.IProductUseCases;
-import com.fiap.techfood.domain.usecases.CategoryUseCases;
-import com.fiap.techfood.domain.usecases.CustomerUseCases;
-import com.fiap.techfood.domain.usecases.OrderUseCases;
-import com.fiap.techfood.domain.usecases.ProductUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.CategoryUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.CustomerUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.OrderUseCases;
+import com.fiap.techfood.domain.interfaces.usecases.ProductUseCases;
+import com.fiap.techfood.domain.usecases.CategoryUseCasesImpl;
+import com.fiap.techfood.domain.usecases.CustomerUseCasesImpl;
+import com.fiap.techfood.domain.usecases.OrderUseCasesImpl;
+import com.fiap.techfood.domain.usecases.ProductUseCasesImpl;
 import com.fiap.techfood.infrastructure.repository.CategoryBdRepository;
 import com.fiap.techfood.infrastructure.repository.CustomerBdRepository;
 import com.fiap.techfood.infrastructure.repository.OrderBdRepository;
@@ -19,22 +19,22 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    IProductUseCases productService(ProductBdRepository repository, CategoryBdRepository categoryRepository) {
-        return new ProductUseCases(repository, categoryRepository);
+    ProductUseCases productUseCases(ProductBdRepository repository, CategoryBdRepository categoryRepository) {
+        return new ProductUseCasesImpl(repository, categoryRepository);
     }
 
     @Bean
-    ICategoryUseCases categoryService(CategoryBdRepository repository) {
-        return new CategoryUseCases(repository);
+    CategoryUseCases categoryUseCases(CategoryBdRepository repository) {
+        return new CategoryUseCasesImpl(repository);
     }
 
     @Bean
-    IOrderUseCases orderService(OrderBdRepository orderBdRepository, ProductBdRepository productRepository, CustomerBdRepository customerBdRepository) {
-        return new OrderUseCases(orderBdRepository, productRepository, customerBdRepository);
+    OrderUseCases orderUseCases(OrderBdRepository orderBdRepository, ProductBdRepository productRepository, CustomerBdRepository customerBdRepository) {
+        return new OrderUseCasesImpl(orderBdRepository, productRepository, customerBdRepository);
     }
 
     @Bean
-    ICustomerUseCases customerService(CustomerBdRepository repository) {
-        return new CustomerUseCases(repository);
+    CustomerUseCases customerUseCases(CustomerBdRepository repository) {
+        return new CustomerUseCasesImpl(repository);
     }
 }
