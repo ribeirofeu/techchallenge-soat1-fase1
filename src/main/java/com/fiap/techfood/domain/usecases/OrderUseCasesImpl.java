@@ -72,6 +72,10 @@ public class OrderUseCasesImpl implements OrderUseCases {
             throw new BusinessException("A data final deve ser posterior a data inicial!");
         }
 
+        if (status == null) {
+            throw new BusinessException("O status não pode ser nulo");
+        }
+
         return repo.findOrdersByStatusAndTimeInterval(status, startDateTime, endDateTime);
     }
 
