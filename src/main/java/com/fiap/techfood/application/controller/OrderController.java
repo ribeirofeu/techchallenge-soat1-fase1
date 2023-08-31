@@ -45,6 +45,12 @@ public class OrderController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "Lista pedidos não finalizados ordenados por status")
+    ResponseEntity<List<Order>> findNotCompletedOrders() {
+        return ResponseEntity.ok(orderService.findNotCompletedOrders());
+    }
+
+    @GetMapping("/status")
     @Operation(summary = "Lista todos os pedidos a partir de um status e um intervalo de tempo")
     ResponseEntity<List<Order>> findOrdersByStatusAndTimeInterval(@Valid SearchOrdersRequestDTO searchOrdersRequestDTO) {
         return ResponseEntity.ok(orderService.findOrdersByStatusAndTimeInterval(searchOrdersRequestDTO));

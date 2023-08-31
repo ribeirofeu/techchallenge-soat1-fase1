@@ -2,6 +2,7 @@ package com.fiap.techfood.domain.services;
 
 import com.fiap.techfood.domain.*;
 import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
+import com.fiap.techfood.domain.dto.request.ProcessOrderPaymentRequestDTO;
 import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
 import com.fiap.techfood.domain.dto.response.OrderPaymentStatusDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +48,7 @@ public class OrderService implements OrderServicePort {
         }
 
         order.setStatus(OrderStatus.CREATED);
-        order.setDateTime(OffsetDateTime.now());
+        order.setCreatedDateTime(OffsetDateTime.now());
 
         List<Product> products = getAndValidateProducts(getProductIds(requestDTO.getItems()));
         List<OrderItem> orderItems = buildOrderItems(requestDTO.getItems(), products);
@@ -110,6 +112,15 @@ public class OrderService implements OrderServicePort {
     }
 
     @Override
+    public List<Order> findNotCompletedOrders() {
+        return repo.findAllNotCompleted().stream()
+                .filter(order -> order.getReceivedDateTime() != null)
+                .sorted(Comparator.comparing((Order order) -> order.getStatus().getDisplayPriority())
+                        .thenComparing(Order::getReceivedDateTime))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public OrderPaymentStatusDTO getOrderPaymentStatus(Long orderNumber) {
         Order order = repo.findById(orderNumber).orElseThrow(() -> new BusinessException("Ordem não encontrada!", HttpStatus.NOT_FOUND));
 
@@ -120,5 +131,17 @@ public class OrderService implements OrderServicePort {
         }
 
         return OrderPaymentStatusDTO.builder().status(OrderPaymentStatus.PENDING).build();
+    }
+
+    @Override
+    public void processOrderPayment(ProcessOrderPaymentRequestDTO processOrderPaymentRequest) {
+        Order order = repo.findById(processOrderPaymentRequest.getOrderId())
+                .orElseThrow(() -> new BusinessException("Ordem não encontrada!", HttpStatus.NOT_FOUND));
+
+        order.setStatus(processOrderPaymentRequest.getPaymentStatus().equals(OrderPaymentStatus.APPROVED) ?
+                OrderStatus.RECEIVED : OrderStatus.REJECTED);
+        order.setReceivedDateTime(OffsetDateTime.now());
+
+        repo.save(order);
     }
 }

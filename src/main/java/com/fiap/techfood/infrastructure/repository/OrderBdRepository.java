@@ -32,7 +32,7 @@ public class OrderBdRepository implements OrderRepository {
     @Override
     @Transactional
     public Order save(Order order) {
-        OrderEntity createdOrder = repo.save(OrderEntity.from(order));
+        OrderEntity createdOrder = repo.saveAndFlush(OrderEntity.from(order));
         order.getItems().forEach(orderItem -> {
             ProductEntity product = productRepository.getReferenceById(orderItem.getProduct().getId());
             createdOrder.addItem(product, orderItem.getQuantity());
@@ -48,8 +48,14 @@ public class OrderBdRepository implements OrderRepository {
     }
 
     @Override
+    public List<Order> findAllNotCompleted() {
+        return repo.findAllByStatusNotIn(List.of(OrderStatus.CREATED, OrderStatus.COMPLETED, OrderStatus.REJECTED))
+                .stream().map(OrderEntity::toOrder).collect(Collectors.toList());
+    }
+
+    @Override
     public List<Order> findOrdersByStatusAndTimeInterval(OrderStatus status, OffsetDateTime startDateTime, OffsetDateTime endDateTime) {
-        return repo.findAllByStatusIsAndDateTimeBetween(status, startDateTime, endDateTime)
+        return repo.findAllByStatusIsAndCreatedDateTimeBetween(status, startDateTime, endDateTime)
                 .stream().map(OrderEntity::toOrder).collect(Collectors.toList());
     }
 }

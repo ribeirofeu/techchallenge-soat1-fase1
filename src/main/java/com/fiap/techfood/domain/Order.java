@@ -18,7 +18,8 @@ public class Order {
     private List<OrderItem> items;
     private BigDecimal totalValue;
     private OrderStatus status;
-    private OffsetDateTime dateTime;
+    private OffsetDateTime createdDateTime;
+    private OffsetDateTime receivedDateTime;
     private String notes;
     private String qrCode;
 

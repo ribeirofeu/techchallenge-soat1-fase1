@@ -15,5 +15,7 @@ public interface OrderRepository {
 
     void updateOrderStatus(Order order);
 
+    List<Order> findAllNotCompleted();
+
     List<Order> findOrdersByStatusAndTimeInterval(OrderStatus status, OffsetDateTime startDateTime, OffsetDateTime endDateTime);
 }

@@ -52,7 +52,10 @@ public class OrderEntity {
     private OrderStatus status;
 
     @Column(name = "`datetime`", nullable = false)
-    private OffsetDateTime dateTime;
+    private OffsetDateTime createdDateTime;
+
+    @Column(name = "`received_datetime`")
+    private OffsetDateTime receivedDateTime;
 
     @Column(name = "`notes`")
     private String notes;
@@ -75,8 +78,10 @@ public class OrderEntity {
 
     public static OrderEntity from(Order order) {
         return OrderEntity.builder()
+                .id(order.getNumber())
                 .customer(order.getCustomer() != null ? new CustomerEntity(order.getCustomer()) : null)
-                .dateTime(order.getDateTime())
+                .createdDateTime(order.getCreatedDateTime())
+                .receivedDateTime(order.getReceivedDateTime())
                 .notes(order.getNotes())
                 .status(order.getStatus())
                 .totalValue(order.getTotalValue())
@@ -89,11 +94,25 @@ public class OrderEntity {
                 .customer(Objects.nonNull(this.customer) ? this.customer.toCustomer() : null)
                 .status(this.status)
                 .totalValue(this.totalValue)
-                .dateTime(this.dateTime)
+                .createdDateTime(this.createdDateTime)
+                .receivedDateTime(this.receivedDateTime)
                 .number(this.id)
                 .notes(this.getNotes())
                 .qrCode(this.getQrCode())
                 .items(this.items.stream().map(OrderItemEntity::toOrderItem).collect(Collectors.toList()))
                 .build();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderEntity that = (OrderEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
