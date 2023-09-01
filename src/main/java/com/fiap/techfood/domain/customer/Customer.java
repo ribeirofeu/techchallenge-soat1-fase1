@@ -1,11 +1,9 @@
 package com.fiap.techfood.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fiap.techfood.domain.dto.request.CustomerRequestDTO;
+import com.fiap.techfood.application.dto.request.CustomerRequestDTO;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @Builder

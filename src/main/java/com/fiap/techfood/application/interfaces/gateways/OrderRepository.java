@@ -1,4 +1,4 @@
-package com.fiap.techfood.domain.ports.repositories;
+package com.fiap.techfood.application.interfaces.gateway;
 
 
 import com.fiap.techfood.domain.Order;

@@ -1,7 +1,7 @@
-package com.fiap.techfood.domain.ports.services;
+package com.fiap.techfood.application.interfaces.usecases;
 
 import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
+import com.fiap.techfood.application.dto.request.ProductRequestDTO;
 
 import java.util.List;
 

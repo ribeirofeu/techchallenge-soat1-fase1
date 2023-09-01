@@ -1,16 +1,16 @@
-package com.fiap.techfood.domain.services;
+package com.fiap.techfood.application.usecases;
 
 import com.fiap.techfood.domain.*;
-import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
-import com.fiap.techfood.domain.dto.request.ProcessOrderPaymentRequestDTO;
-import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
-import com.fiap.techfood.domain.dto.response.OrderPaymentStatusDTO;
+import com.fiap.techfood.application.dto.request.OrderRequestDTO;
+import com.fiap.techfood.application.dto.request.ProcessOrderPaymentRequestDTO;
+import com.fiap.techfood.application.dto.request.SearchOrdersRequestDTO;
+import com.fiap.techfood.application.dto.response.OrderPaymentStatusDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.ports.repositories.CustomerRepository;
-import com.fiap.techfood.domain.ports.repositories.OrderRepository;
-import com.fiap.techfood.domain.ports.repositories.ProductRepository;
-import com.fiap.techfood.domain.ports.services.OrderServicePort;
-import com.fiap.techfood.domain.ports.services.PaymentServicePort;
+import com.fiap.techfood.application.interfaces.gateways.CustomerRepository;
+import com.fiap.techfood.application.interfaces.gateways.OrderRepository;
+import com.fiap.techfood.application.interfaces.gateways.ProductRepository;
+import com.fiap.techfood.application.interfaces.usecases.OrderUseCases;
+import com.fiap.techfood.application.interfaces.usecases.PaymentUseCases;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.HttpStatus;
 
@@ -21,16 +21,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderService implements OrderServicePort {
+public class OrderService implements OrderUseCases {
     private final OrderRepository repo;
     private final ProductRepository productRepository;
 
     private final CustomerRepository customerRepository;
 
-    private final PaymentServicePort paymentService;
+    private final PaymentUseCases paymentService;
 
     public OrderService(final OrderRepository orderRepository, final ProductRepository productRepository,
-                        final CustomerRepository customerRepository, final PaymentServicePort paymentService) {
+                        final CustomerRepository customerRepository, final PaymentUseCases paymentService) {
         this.repo = orderRepository;
         this.productRepository = productRepository;
         this.customerRepository = customerRepository;

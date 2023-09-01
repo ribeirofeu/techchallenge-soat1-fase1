@@ -1,15 +1,15 @@
-package com.fiap.techfood.domain.services;
+package com.fiap.techfood.application.usecases;
 
 import com.fiap.techfood.domain.Customer;
-import com.fiap.techfood.domain.dto.request.CustomerRequestDTO;
+import com.fiap.techfood.application.dto.request.CustomerRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.ports.repositories.CustomerRepository;
-import com.fiap.techfood.domain.ports.services.CustomerServicePort;
+import com.fiap.techfood.application.interfaces.gateways.CustomerRepository;
+import com.fiap.techfood.application.interfaces.usecases.CustomerUseCases;
 import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
 
-public class CustomerService implements CustomerServicePort {
+public class CustomerService implements CustomerUseCases {
 
     private final CustomerRepository customerRepository;
 

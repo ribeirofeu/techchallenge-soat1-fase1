@@ -1,17 +1,17 @@
-package com.fiap.techfood.domain.services;
+package com.fiap.techfood.application.usecases;
 
 import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
+import com.fiap.techfood.application.dto.request.ProductRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.ports.repositories.CategoryRepository;
-import com.fiap.techfood.domain.ports.repositories.ProductRepository;
-import com.fiap.techfood.domain.ports.services.ProductServicePort;
+import com.fiap.techfood.application.interfaces.gateways.CategoryRepository;
+import com.fiap.techfood.application.interfaces.gateways.ProductRepository;
+import com.fiap.techfood.application.interfaces.usecases.ProductUseCases;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class ProductService implements ProductServicePort {
+public class ProductService implements ProductUseCases {
 
   private final ProductRepository repo;
 

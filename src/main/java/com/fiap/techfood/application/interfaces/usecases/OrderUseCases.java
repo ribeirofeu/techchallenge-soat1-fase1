@@ -1,12 +1,11 @@
-package com.fiap.techfood.domain.ports.services;
+package com.fiap.techfood.application.interfaces.usecases;
 
 import com.fiap.techfood.domain.Order;
-import com.fiap.techfood.domain.OrderPaymentStatus;
 import com.fiap.techfood.domain.OrderStatus;
-import com.fiap.techfood.domain.dto.request.OrderRequestDTO;
-import com.fiap.techfood.domain.dto.request.ProcessOrderPaymentRequestDTO;
-import com.fiap.techfood.domain.dto.request.SearchOrdersRequestDTO;
-import com.fiap.techfood.domain.dto.response.OrderPaymentStatusDTO;
+import com.fiap.techfood.application.dto.request.OrderRequestDTO;
+import com.fiap.techfood.application.dto.request.ProcessOrderPaymentRequestDTO;
+import com.fiap.techfood.application.dto.request.SearchOrdersRequestDTO;
+import com.fiap.techfood.application.dto.response.OrderPaymentStatusDTO;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
-package com.fiap.techfood.domain.ports.services;
+package com.fiap.techfood.application.interfaces.usecases;
 
 import com.fiap.techfood.domain.Order;
-
-import java.math.BigDecimal;
 
 public interface PaymentServicePort {
     String getPaymentQRCode(Order order);

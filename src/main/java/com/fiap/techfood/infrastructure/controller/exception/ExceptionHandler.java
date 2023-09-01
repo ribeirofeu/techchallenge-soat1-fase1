@@ -1,7 +1,7 @@
-package com.fiap.techfood.application.handler;
+package com.fiap.techfood.infrastructure.handler;
 
-import com.fiap.techfood.application.handler.model.ErrorResponse;
-import com.fiap.techfood.domain.exception.BusinessException;
+import com.fiap.techfood.infrastructure.handler.exception.ErrorResponse;
+import com.fiap.techfood.domain.commons.exception.BusinessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 

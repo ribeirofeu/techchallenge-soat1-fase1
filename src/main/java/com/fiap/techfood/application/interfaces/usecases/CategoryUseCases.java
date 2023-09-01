@@ -1,12 +1,12 @@
-package com.fiap.techfood.domain.ports.services;
+package com.fiap.techfood.application.interfaces.usecases;
 
 import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.dto.request.CategoryRequestDTO;
+import com.fiap.techfood.application.dto.request.CategoryRequestDTO;
 
 import java.util.List;
 
-public interface CategoryServicePort {
+public interface CategoryUserCases {
 
     Long createCategory(CategoryRequestDTO dto) ;
 

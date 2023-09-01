@@ -1,17 +1,17 @@
-package com.fiap.techfood.domain.services;
+package com.fiap.techfood.application.usecases;
 
 import com.fiap.techfood.domain.Category;
 import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.dto.request.CategoryRequestDTO;
+import com.fiap.techfood.application.dto.request.CategoryRequestDTO;
 import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.ports.services.CategoryServicePort;
-import com.fiap.techfood.domain.ports.repositories.CategoryRepository;
+import com.fiap.techfood.application.interfaces.usecases.CategoryUseCases;
+import com.fiap.techfood.application.interfaces.gateways.CategoryRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class CategoryService implements CategoryServicePort {
+public class CategoryService implements CategoryUseCases {
 
   private final CategoryRepository repo;
 

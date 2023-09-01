@@ -1,6 +1,6 @@
 package com.fiap.techfood.domain;
 
-import com.fiap.techfood.domain.dto.request.ProductRequestDTO;
+import com.fiap.techfood.application.dto.request.ProductRequestDTO;
 import lombok.Builder;
 import lombok.Data;
 

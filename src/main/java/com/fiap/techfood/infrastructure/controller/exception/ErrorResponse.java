@@ -1,4 +1,4 @@
-package com.fiap.techfood.application.handler.model;
+package com.fiap.techfood.infrastructure.handler.exception;
 
 import lombok.Data;
 
