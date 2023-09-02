@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techfood-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: app-techfood
+      labels:
+        app: app-techfood
+    spec:
+      containers:
+        - name: techfood-container
+          image: techfood:v1
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef: 
+                name: app-configmap
+          env:
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+  selector:
+    matchLabels:
+      app: app-techfood
+    
