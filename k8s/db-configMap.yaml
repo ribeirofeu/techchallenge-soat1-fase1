@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-configmap
+data:
+  MYSQL_ROOT_PASSWORD: example
+  MYSQL_PASSWORD: techfood
+  MYSQL_DATABASE: techfood
+  MYSQL_USER: techfood

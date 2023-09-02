@@ -1,0 +1,11 @@
+mysql:
+  username: ${MYSQL_USERNAME}
+  password: ${MYSQL_PASSWORD}
+  database: ${MYSQL_DATABASE}
+  url: ${MYSQL_HOST}
+
+spring:
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update

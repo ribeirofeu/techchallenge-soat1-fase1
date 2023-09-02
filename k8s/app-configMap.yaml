@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+data:
+  APP_PROFILE: prod
+  MYSQL_DATABASE: techfood
+  MYSQL_HOST: svc-db:3306
