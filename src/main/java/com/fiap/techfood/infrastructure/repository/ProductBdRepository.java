@@ -1,12 +1,12 @@
 package com.fiap.techfood.infrastructure.repository;
 
-import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.ports.repositories.ProductRepository;
+import com.fiap.techfood.application.interfaces.gateways.ProductRepository;
+import com.fiap.techfood.domain.commons.HttpStatusCodes;
+import com.fiap.techfood.domain.commons.exception.BusinessException;
+import com.fiap.techfood.domain.products.Product;
 import com.fiap.techfood.infrastructure.repository.entity.ProductEntity;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class ProductBdRepository implements ProductRepository {
     try {
       repo.deleteById(id);
     } catch (EmptyResultDataAccessException e) {
-      throw new BusinessException("Product not found", HttpStatus.NOT_FOUND);
+      throw new BusinessException("Product not found", HttpStatusCodes.NOT_FOUND);
     }
   }
 
@@ -62,7 +62,7 @@ public class ProductBdRepository implements ProductRepository {
       ProductEntity entity = new ProductEntity(product);
       repo.save(entity);
     } catch (DataIntegrityViolationException e) {
-      throw new BusinessException("Error updating Product", HttpStatus.BAD_REQUEST);
+      throw new BusinessException("Error updating Product", HttpStatusCodes.BAD_REQUEST);
     }
   }
 }

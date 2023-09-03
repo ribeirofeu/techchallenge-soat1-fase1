@@ -1,4 +1,4 @@
-package com.fiap.techfood.domain.dto.request;
+package com.fiap.techfood.application.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.fiap.techfood.domain.dto.response;
+package com.fiap.techfood.application.dto.response;
 
-import com.fiap.techfood.domain.OrderPaymentStatus;
+import com.fiap.techfood.domain.order.OrderPaymentStatus;
 import lombok.Builder;
 import lombok.Data;
 

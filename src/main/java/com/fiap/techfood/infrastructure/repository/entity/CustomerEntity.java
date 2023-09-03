@@ -1,11 +1,7 @@
 package com.fiap.techfood.infrastructure.repository.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fiap.techfood.domain.Customer;
-import com.fiap.techfood.domain.dto.request.CustomerRequestDTO;
+import com.fiap.techfood.domain.customer.Customer;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

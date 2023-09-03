@@ -1,7 +1,8 @@
-package com.fiap.techfood.domain;
+package com.fiap.techfood.domain.order;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fiap.techfood.application.dto.request.OrderRequestDTO;
+import com.fiap.techfood.domain.products.Product;
 import lombok.Builder;
 import lombok.Getter;
 

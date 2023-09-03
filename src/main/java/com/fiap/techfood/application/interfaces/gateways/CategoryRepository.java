@@ -1,7 +1,7 @@
-package com.fiap.techfood.application.interfaces.gateway;
+package com.fiap.techfood.application.interfaces.gateways;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.products.Category;
+import com.fiap.techfood.domain.products.Product;
 import java.util.List;
 import java.util.Optional;
 

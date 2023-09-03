@@ -1,8 +1,8 @@
 package com.fiap.techfood.infrastructure.repository;
 
-import com.fiap.techfood.domain.Order;
-import com.fiap.techfood.domain.OrderStatus;
-import com.fiap.techfood.domain.ports.repositories.OrderRepository;
+import com.fiap.techfood.domain.order.Order;
+import com.fiap.techfood.domain.order.OrderStatus;
+import com.fiap.techfood.application.interfaces.gateways.OrderRepository;
 import com.fiap.techfood.infrastructure.repository.entity.OrderEntity;
 import com.fiap.techfood.infrastructure.repository.entity.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;

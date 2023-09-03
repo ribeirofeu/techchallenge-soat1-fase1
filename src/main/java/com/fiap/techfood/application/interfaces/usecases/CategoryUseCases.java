@@ -1,12 +1,12 @@
 package com.fiap.techfood.application.interfaces.usecases;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.products.Category;
+import com.fiap.techfood.domain.products.Product;
 import com.fiap.techfood.application.dto.request.CategoryRequestDTO;
 
 import java.util.List;
 
-public interface CategoryUserCases {
+public interface CategoryUseCases {
 
     Long createCategory(CategoryRequestDTO dto) ;
 

@@ -1,4 +1,4 @@
-package com.fiap.techfood.domain;
+package com.fiap.techfood.domain.products;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fiap.techfood.application.dto.request.CategoryRequestDTO;

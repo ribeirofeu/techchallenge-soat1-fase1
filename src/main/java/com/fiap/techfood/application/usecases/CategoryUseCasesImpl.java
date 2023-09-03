@@ -1,21 +1,21 @@
 package com.fiap.techfood.application.usecases;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.commons.HttpStatusCodes;
+import com.fiap.techfood.domain.products.Category;
+import com.fiap.techfood.domain.products.Product;
 import com.fiap.techfood.application.dto.request.CategoryRequestDTO;
-import com.fiap.techfood.domain.exception.BusinessException;
+import com.fiap.techfood.domain.commons.exception.BusinessException;
 import com.fiap.techfood.application.interfaces.usecases.CategoryUseCases;
 import com.fiap.techfood.application.interfaces.gateways.CategoryRepository;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class CategoryService implements CategoryUseCases {
+public class CategoryUseCasesImpl implements CategoryUseCases {
 
   private final CategoryRepository repo;
 
-  public CategoryService(final CategoryRepository repo) {
+  public CategoryUseCasesImpl(final CategoryRepository repo) {
     this.repo = repo;
   }
 
@@ -28,7 +28,7 @@ public class CategoryService implements CategoryUseCases {
 
   @Override
   public Category findCategoryById(Long id) {
-    return repo.findById(id).orElseThrow(() -> new BusinessException("Category ID not found", HttpStatus.NOT_FOUND));
+    return repo.findById(id).orElseThrow(() -> new BusinessException("Category ID not found", HttpStatusCodes.NOT_FOUND));
   }
 
   @Override
@@ -53,7 +53,7 @@ public class CategoryService implements CategoryUseCases {
             category.setId(id);
             repo.save(category);
         }catch (DataIntegrityViolationException e) {
-            throw new BusinessException("Category ID invalid", HttpStatus.NOT_FOUND);
+            throw new BusinessException("Category ID invalid", HttpStatusCodes.NOT_FOUND);
         }
     }
 }
