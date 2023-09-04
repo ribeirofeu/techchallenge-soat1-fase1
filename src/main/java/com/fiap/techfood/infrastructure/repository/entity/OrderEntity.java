@@ -1,7 +1,7 @@
 package com.fiap.techfood.infrastructure.repository.entity;
 
-import com.fiap.techfood.domain.Order;
-import com.fiap.techfood.domain.OrderStatus;
+import com.fiap.techfood.domain.order.Order;
+import com.fiap.techfood.domain.order.OrderStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

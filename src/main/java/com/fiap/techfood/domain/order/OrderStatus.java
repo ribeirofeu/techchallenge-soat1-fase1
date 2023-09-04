@@ -1,4 +1,4 @@
-package com.fiap.techfood.domain;
+package com.fiap.techfood.domain.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

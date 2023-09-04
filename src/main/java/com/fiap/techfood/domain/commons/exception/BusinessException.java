@@ -1,16 +1,16 @@
-package com.fiap.techfood.domain.exception;
+package com.fiap.techfood.domain.commons.exception;
 
+import com.fiap.techfood.domain.commons.HttpStatusCodes;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 public class BusinessException extends RuntimeException{
 
     @Getter
-    private HttpStatus httpStatus;
+    private int httpStatus;
 
-    public BusinessException (String message, HttpStatus httpStatus) {
+    public BusinessException (String message, HttpStatusCodes code) {
         super(message);
-        this.httpStatus = httpStatus;
+        this.httpStatus = code.getCode();
     }
 
 }

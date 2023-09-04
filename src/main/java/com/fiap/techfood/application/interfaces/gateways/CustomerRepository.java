@@ -1,6 +1,6 @@
-package com.fiap.techfood.application.interfaces.gateway;
+package com.fiap.techfood.application.interfaces.gateways;
 
-import com.fiap.techfood.domain.Customer;
+import com.fiap.techfood.domain.customer.Customer;
 
 import java.util.Optional;
 

@@ -1,7 +1,7 @@
 package com.fiap.techfood.infrastructure.repository.entity;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.products.Category;
+import com.fiap.techfood.domain.products.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

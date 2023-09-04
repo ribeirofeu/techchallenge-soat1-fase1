@@ -1,9 +1,9 @@
 package com.fiap.techfood.application.interfaces.usecases;
 
-import com.fiap.techfood.domain.Customer;
+import com.fiap.techfood.domain.customer.Customer;
 import com.fiap.techfood.application.dto.request.CustomerRequestDTO;
 
-public interface CustomerUsesCases {
+public interface CustomerUseCases {
 
     Long createCustomer(CustomerRequestDTO dto);
 

@@ -1,23 +1,23 @@
 package com.fiap.techfood.application.usecases;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
+import com.fiap.techfood.domain.commons.HttpStatusCodes;
+import com.fiap.techfood.domain.products.Category;
+import com.fiap.techfood.domain.products.Product;
 import com.fiap.techfood.application.dto.request.ProductRequestDTO;
-import com.fiap.techfood.domain.exception.BusinessException;
+import com.fiap.techfood.domain.commons.exception.BusinessException;
 import com.fiap.techfood.application.interfaces.gateways.CategoryRepository;
 import com.fiap.techfood.application.interfaces.gateways.ProductRepository;
 import com.fiap.techfood.application.interfaces.usecases.ProductUseCases;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-public class ProductService implements ProductUseCases {
+public class ProductUseCasesImpl implements ProductUseCases {
 
   private final ProductRepository repo;
 
   private final CategoryRepository categoryRepository;
 
-  public ProductService(final ProductRepository repo, CategoryRepository categoryRepository) {
+  public ProductUseCasesImpl(final ProductRepository repo, CategoryRepository categoryRepository) {
     this.repo = repo;
     this.categoryRepository = categoryRepository;
   }
@@ -30,7 +30,7 @@ public class ProductService implements ProductUseCases {
         categoryRepository
             .findById(dto.getCategoryId())
             .orElseThrow(
-                () -> new BusinessException("Invalid Category ID", HttpStatus.BAD_REQUEST));
+                () -> new BusinessException("Invalid Category ID", HttpStatusCodes.BAD_REQUEST));
     product.setCategory(category);
 
     repo.save(product);
@@ -40,7 +40,7 @@ public class ProductService implements ProductUseCases {
   @Override
   public Product findProductById(Long id) {
     return repo.findById(id)
-        .orElseThrow(() -> new BusinessException("Product ID not found", HttpStatus.NOT_FOUND));
+        .orElseThrow(() -> new BusinessException("Product ID not found", HttpStatusCodes.NOT_FOUND));
   }
 
   @Override
@@ -62,7 +62,7 @@ public class ProductService implements ProductUseCases {
         categoryRepository
             .findById(dto.getCategoryId())
             .orElseThrow(
-                () -> new BusinessException("Invalid Category ID", HttpStatus.BAD_REQUEST));
+                () -> new BusinessException("Invalid Category ID", HttpStatusCodes.BAD_REQUEST));
     product.setCategory(category);
     repo.updateProduct(product);
   }

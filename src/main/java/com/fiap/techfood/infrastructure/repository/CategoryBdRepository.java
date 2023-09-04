@@ -1,18 +1,19 @@
 package com.fiap.techfood.infrastructure.repository;
 
-import com.fiap.techfood.domain.Category;
-import com.fiap.techfood.domain.Product;
-import com.fiap.techfood.domain.exception.BusinessException;
-import com.fiap.techfood.domain.ports.repositories.CategoryRepository;
+import com.fiap.techfood.application.interfaces.gateways.CategoryRepository;
+import com.fiap.techfood.domain.commons.HttpStatusCodes;
+import com.fiap.techfood.domain.commons.exception.BusinessException;
+import com.fiap.techfood.domain.products.Category;
+import com.fiap.techfood.domain.products.Product;
 import com.fiap.techfood.infrastructure.repository.entity.CategoryEntity;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Component;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryBdRepository implements CategoryRepository {
@@ -58,7 +59,7 @@ public class CategoryBdRepository implements CategoryRepository {
     try {
       repo.deleteById(id);
     } catch (EmptyResultDataAccessException e) {
-      throw new BusinessException("Category not found", HttpStatus.NOT_FOUND);
+      throw new BusinessException("Category not found", HttpStatusCodes.NOT_FOUND);
     }
   }
 
@@ -68,7 +69,7 @@ public class CategoryBdRepository implements CategoryRepository {
       CategoryEntity entity = new CategoryEntity(category);
       repo.save(entity);
     } catch (DataIntegrityViolationException e) {
-      throw new BusinessException("Category ID invalid", HttpStatus.NOT_FOUND);
+      throw new BusinessException("Category ID invalid", HttpStatusCodes.NOT_FOUND);
     }
   }
 }

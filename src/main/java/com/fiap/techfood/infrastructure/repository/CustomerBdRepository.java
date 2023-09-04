@@ -1,11 +1,10 @@
 package com.fiap.techfood.infrastructure.repository;
 
-import com.fiap.techfood.domain.Customer;
-import com.fiap.techfood.domain.ports.repositories.CustomerRepository;
+import com.fiap.techfood.application.interfaces.gateways.CustomerRepository;
+import com.fiap.techfood.domain.customer.Customer;
 import com.fiap.techfood.infrastructure.repository.entity.CustomerEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.Optional;
 
 @Component
