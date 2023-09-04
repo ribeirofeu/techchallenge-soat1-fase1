@@ -1,5 +1,7 @@
 ## Executando a aplicação no cluster Kubernetes
 
+`OBS: para rodar a aplicação no kubernets, é necessário fazer o build da imagem docker dessa forma: docker build -t techfood:v1`
+
 ### 1 -  Criando POD responsável pelo banco de dados MySql
 
 1.1 - Criar o ConfigMap
