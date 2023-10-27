@@ -1,11 +1,16 @@
-FROM maven:3.9.3-amazoncorretto-17
+FROM maven:3.9.4-eclipse-temurin-17 AS BUILD_IMAGE
 
 WORKDIR /app
 
-COPY . .
+COPY . /app
 
-RUN mvn dependency:go-offline
+RUN mvn package -DskipTests --no-transfer-progress \
+    && apt-get clean \
+    && rm -rf /root/.m2
 
-RUN mvn package -DskipTests
+FROM eclipse-temurin:17.0.8.1_1-jre-jammy
 
-CMD ["java", "-jar", "target/techfood-0.0.1-SNAPSHOT.jar"]
+COPY --from=BUILD_IMAGE /app/target/*.jar /opt/app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/opt/app.jar"]
