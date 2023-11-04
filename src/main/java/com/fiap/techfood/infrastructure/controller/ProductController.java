@@ -25,7 +25,7 @@ public class ProductController {
     }
 
     @PostMapping
-    @Operation(summary = "Cria um produto")
+    @Operation(summary = "Criação de produto")
     ResponseEntity<Long> createProduct (@RequestBody ProductRequestDTO request) {
         Long id = useCases.createProduct(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
