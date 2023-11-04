@@ -5,7 +5,7 @@ import com.fiap.techfood.domain.products.Product;
 import java.util.List;
 import java.util.Optional;
 
-public interface CategoryRepository {
+public interface CategoryRepository  {
 
     Optional<Category> findById(Long id);
 
