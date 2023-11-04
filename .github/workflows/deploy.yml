@@ -48,6 +48,12 @@ jobs:
           task-definition: ${{ env.ECS_TD }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
+          environment-variables: |
+            MYSQL_HOST=${{ secrets.MYSQL_HOST }}
+            MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
+            MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+            MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }}
+            APP_PROFILE=${{ secrets.APP_PROFILE }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
