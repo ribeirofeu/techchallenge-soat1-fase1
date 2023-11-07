@@ -60,7 +60,7 @@ Caso o comando `make` não funcione, execute o seguinte comando para levantar os
 docker-compose up -d
 ```
 
-E o seguinte comando para derrubar os containers
+E o seguinte comando para derrubar os containers:
 
 ```
 docker-compose down
