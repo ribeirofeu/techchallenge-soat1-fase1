@@ -15,12 +15,14 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
-* Ter o JAVA (Mínimo JDK17) instalado em seu PC.
-* Ter algum contexto do Docker (DEAMON) rodando localmente. 
+
+- Ter o JAVA (Mínimo JDK17) instalado em seu PC.
+- Ter algum contexto do Docker (DAEMON) rodando localmente.
 
 ## 🚀 Instalando o projeto
 
 Se você está rodando o projeto pela primeira vez, execute:
+
 ```
 make build
 ```
@@ -47,11 +49,10 @@ Verifique se os seguintes containers estão rodando com o comando `make status`:
 
 ### Agora você pode:
 
-| Comando         | Descrição                       |
-|-----------------|---------------------------------|
-| `make up `      | Levantar os containers          |
-| `make down `    | Derrubar os containers          |
-
+| Comando      | Descrição              |
+| ------------ | ---------------------- |
+| `make up `   | Levantar os containers |
+| `make down ` | Derrubar os containers |
 
 Caso o comando `make` não funcione, execute o seguinte comando para levantar os containers:
 
@@ -70,6 +71,7 @@ docker-compose down
 Pull requests são super bem-vindas!
 
 Antes de contribuir, pedimos, por gentileza, que verifique se sua PR está em conformidade com:
+
 1. Código limpo, desacoplado e sem qualquer utensílio de uso para debugs;
 1. Commits seguindo os padrões de [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 1. Fluxo 100% testado (ou bem próximo a isto), incluindo os cenários de erros;
@@ -83,22 +85,26 @@ Antes de contribuir, pedimos, por gentileza, que verifique se sua PR está em co
 ## Links úteis
 
 ### Swagger
+
 | Ambiente | Link                                  |
-|----------|---------------------------------------|
+| -------- | ------------------------------------- |
 | LOCAL    | http://localhost:8080/swagger-ui.html |
 | QA       |                                       |
 
 ### Health
+
 | Ambiente | Link                                  |
-|----------|---------------------------------------|
+| -------- | ------------------------------------- |
 | LOCAL    | http://localhost:8080/actuator/health |
 | QA       |                                       |
 | PROD     |                                       |
 
 ## Depêndencias Internas
-1. 
+
+1.
 
 ## Depêndencias Externas
-1. 
+
+1.
 
 [⬆ Voltar ao topo](#projeto-tech-challenge)<br>
